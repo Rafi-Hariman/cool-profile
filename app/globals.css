@@ -1,0 +1,178 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* The app is OLED-dark. --background (≈#020409) paints the whole page
+       beneath the hero's own canvas (#030407), so every section reads as
+       one continuous deep-space field. */
+    --background: 228 64% 2%;
+    --foreground: 210 20% 98%;
+
+    --card: 228 50% 3%;
+    --card-foreground: 210 20% 98%;
+
+    --popover: 228 50% 3%;
+    --popover-foreground: 210 20% 98%;
+
+    --primary: 210 20% 98%;
+    --primary-foreground: 228 64% 2%;
+
+    --secondary: 230 15% 10%;
+    --secondary-foreground: 210 20% 98%;
+
+    --muted: 230 15% 10%;
+    --muted-foreground: 215 16% 60%;
+
+    --accent: 199 89% 48%;
+    --accent-foreground: 228 64% 2%;
+
+    --destructive: 0 63% 55%;
+    --destructive-foreground: 210 20% 98%;
+
+    --border: 228 18% 12%;
+    --input: 228 18% 12%;
+    --ring: 199 89% 48%;
+
+    --radius: 0.75rem;
+
+    --font-sans: var(--font-grotesk);
+    --font-mono: var(--font-jetbrains);
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1, "ss01" 1;
+  }
+
+  ::selection {
+    background-color: hsl(var(--accent) / 0.35);
+    color: hsl(var(--foreground));
+  }
+}
+
+@layer utilities {
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-6 sm:px-8;
+  }
+}
+
+/* Animated gradient ring + dark sheen, shared by GradientButton / Button / Badge
+   and the rounded chips. The ring follows the element's own border-radius. */
+@property --gb-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes gb-spin {
+  from {
+    --gb-angle: 0deg;
+  }
+  to {
+    --gb-angle: 360deg;
+  }
+}
+
+@layer components {
+  .gradient-border {
+    position: relative;
+  }
+
+  .gradient-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: conic-gradient(
+      from 0deg,
+      hsl(0 0% 100%),
+      hsl(220 14% 82%),
+      hsl(220 10% 55%),
+      hsl(0 0% 90%),
+      hsl(0 0% 100%)
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* On hover, a bright glint circles the border. */
+  .gradient-border:hover::before {
+    background: conic-gradient(
+      from var(--gb-angle),
+      hsl(0 0% 100% / 0.15) 0deg,
+      hsl(0 0% 100% / 0.15) 300deg,
+      hsl(0 0% 100%) 345deg,
+      hsl(0 0% 100%) 360deg
+    );
+    animation: gb-spin 1.4s linear infinite;
+  }
+
+  .gradient-fill {
+    background:
+      radial-gradient(120% 140% at 12% 0%, hsl(0 0% 100% / 0.1), transparent 55%),
+      linear-gradient(180deg, hsl(220 12% 16%), hsl(228 64% 4%));
+  }
+
+  /* Glass shine that sweeps across the button on hover. */
+  .gradient-shine {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .gradient-shine::after {
+    content: "";
+    position: absolute;
+    top: -40%;
+    bottom: -40%;
+    left: -70%;
+    width: 40%;
+    background: linear-gradient(
+      100deg,
+      transparent 0%,
+      hsl(0 0% 100% / 0.35) 50%,
+      transparent 100%
+    );
+    transform: skewX(-20deg);
+    transition: left 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+  }
+
+  .gradient-shine:hover::after {
+    left: 140%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gradient-border::before,
+    .gradient-border:hover::before {
+      animation: none;
+    }
+    .gradient-shine::after {
+      transition: none;
+    }
+  }
+}
