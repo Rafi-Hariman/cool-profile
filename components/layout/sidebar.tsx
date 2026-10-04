@@ -13,7 +13,7 @@ const socialIcons = {
 
 export function Sidebar() {
   return (
-    <div className="flex h-full flex-col gap-8 py-8 pr-10">
+    <div className="flex h-full flex-col gap-8 py-8 pr-10 lg:pt-24">
       {/* Identity */}
       <div>
         <h1 className="text-3xl font-bold tracking-tight text-foreground">
@@ -73,10 +73,11 @@ export function Sidebar() {
         </p>
       </div>
 
-      {/* Signature 3D card — desktop-only, lazy, contained (docs/07) */}
-      <div className="mt-auto">
-        <RobotCard />
-      </div>
+      {/* Signature 3D card — desktop-only, lazy, contained (docs/07).
+          Sits directly in the column (no mt-auto) so it stays connected to
+          the group above rather than floating at the bottom of tall
+          viewports. */}
+      <RobotCard />
     </div>
   );
 }

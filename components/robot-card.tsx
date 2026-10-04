@@ -108,10 +108,11 @@ export default function RobotCard({ className }: RobotCardProps) {
         </div>
       ) : null}
 
-      {/* Fade the scene floor into the card's own background */}
+      {/* Fade the scene floor into the card's own background — kept short so
+          it does not obscure the figure's feet. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-[#04060c] to-transparent"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-[#04060c] to-transparent"
       />
     </Card>
   );

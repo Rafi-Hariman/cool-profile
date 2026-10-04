@@ -33,7 +33,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             side === "left" ? "shader-fade-l" : "shader-fade-r"
           }`}
         >
-          <AnimatedShaderBackground className="opacity-45" />
+          <AnimatedShaderBackground className="opacity-35" />
         </div>
       ))}
 

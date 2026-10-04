@@ -68,10 +68,13 @@ const FRAGMENT_SHADER = /* glsl */ `
     for (float i = 0.0; i < 35.0; i++) {
       v = p + cos(i * i + (iTime + p.x * 0.08) * 0.025 + i * vec2(13.0, 11.0)) * 3.5 + vec2(sin(iTime * 3.0 + i) * 0.003, cos(iTime * 3.5 - i) * 0.003);
       float tailNoise = fbm(v + vec2(iTime * 0.5, i)) * 0.3 * (1.0 - (i / 35.0));
+      // Cyan, matched to the UI accent (--accent ≈ hsl(199 89% 48%) = #0da2e7):
+      // red stays low, green and blue stay high. Kept desaturated so the
+      // strip reads as texture, not a competing element.
       vec4 auroraColors = vec4(
-        0.1 + 0.3 * sin(i * 0.2 + iTime * 0.4),
-        0.3 + 0.5 * cos(i * 0.3 + iTime * 0.5),
-        0.7 + 0.3 * sin(i * 0.4 + iTime * 0.3),
+        0.04 + 0.16 * sin(i * 0.2 + iTime * 0.4),
+        0.55 + 0.22 * cos(i * 0.3 + iTime * 0.5),
+        0.82 + 0.18 * sin(i * 0.4 + iTime * 0.3),
         1.0
       );
       vec4 currentContribution = auroraColors * exp(sin(i * i + iTime * 0.8)) / length(max(v, vec2(v.x * f * 0.015, v.y * 1.5)));
@@ -79,7 +82,7 @@ const FRAGMENT_SHADER = /* glsl */ `
       o += currentContribution * (1.0 + tailNoise * 0.8) * thinnessFactor;
     }
 
-    vec4 aurora = tanh(pow(o / 100.0, vec4(1.6))) * 2.2;
+    vec4 aurora = tanh(pow(o / 100.0, vec4(1.6))) * 1.5;
     gl_FragColor = aurora;
   }
 `;
