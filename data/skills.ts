@@ -1,5 +1,5 @@
-// Technical capabilities grouped by how you think about them — not a
-// wall of logos.
+// Technical capabilities grouped by verified use across the public repos
+// (cool-profile, bsg-cashier, matematik-apps, lib-boilerplate-ionic-angular).
 export interface SkillGroup {
   label: string;
   skills: string[];
@@ -8,14 +8,24 @@ export interface SkillGroup {
 export const skillGroups: SkillGroup[] = [
   {
     label: "Frontend",
-    skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Motion"],
+    skills: [
+      "Angular",
+      "React",
+      "Next.js",
+      "TypeScript",
+      "JavaScript",
+      "HTML",
+      "CSS",
+      "Tailwind CSS",
+      "Responsive Web Design",
+    ],
   },
   {
-    label: "Architecture",
-    skills: ["Design systems", "Component APIs", "Accessibility", "Testing"],
+    label: "Mobile & PWA",
+    skills: ["Ionic", "Capacitor", "Progressive Web Apps", "Firebase"],
   },
   {
-    label: "Tooling & Ops",
-    skills: ["Node", "Vite", "Playwright", "CI/CD"],
+    label: "Tools & Workflow",
+    skills: ["Git", "GitHub", "Vite"],
   },
 ];

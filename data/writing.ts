@@ -1,6 +1,5 @@
-// Articles — renders only when non-empty (docs/03-UI-UX: no empty UI).
-// SAMPLE — replace with real articles; delete the sample entry to hide
-// the section until real writing exists.
+// Writing — no published articles yet, so the section renders an honest
+// "in progress" panel instead of placeholder links (see sections/writing.tsx).
 export interface Article {
   title: string;
   description: string;
@@ -8,12 +7,4 @@ export interface Article {
   href: string;
 }
 
-export const articles: Article[] = [
-  {
-    title: "[Article Title — a real technical post]",
-    description:
-      "[One-line summary of the technical idea or lesson.]",
-    year: "[2025]",
-    href: "#",
-  },
-];
+export const articles: Article[] = [];

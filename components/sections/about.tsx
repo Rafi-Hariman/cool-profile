@@ -10,7 +10,7 @@ export function About() {
         id="about-title"
         index="01"
         eyebrow="About"
-        title="Engineer first, pixel-second."
+        title="Growing through work, study, and real projects."
       />
 
       {person.summary ? (
@@ -24,20 +24,30 @@ export function About() {
       <Reveal className="mt-8">
         <div className="flex max-w-prose flex-col gap-5 text-base leading-[1.7] text-muted-foreground sm:text-lg">
           <p>
-            I&apos;m a frontend engineer who cares about the details other
-            people scroll past — frame budgets, spring curves, token
-            discipline, and interfaces that hold up under real users.
+            I began my professional journey as an intern at BSI UII,
+            contributing to both backend and frontend development. That
+            experience helped me understand how application interfaces,
+            APIs, data, and team workflows connect in real software
+            projects.
           </p>
           <p>
-            I work at the seam between design and engineering: the place
-            where motion, typography, and data meet a shipping deadline.
-            When something feels off but you can&apos;t say why, that&apos;s
-            the problem I like to chase down.
+            After completing the internship, I continued at BSI UII as a
+            contract employee focused on frontend development. My current
+            work involves translating UI/UX designs into maintainable
+            interfaces, developing and improving web applications, and
+            supporting ongoing application maintenance.
           </p>
           <p>
-            Lately I&apos;m most interested in real-time graphics,
-            developer tooling, and the quiet craft of making complex things
-            feel simple.
+            Alongside my professional role, I am pursuing a bachelor&apos;s
+            degree in Informatics through the employee-class program at
+            Universitas Mercu Buana Yogyakarta. I also take selected
+            freelance projects to broaden my experience and build practical
+            digital solutions for individuals, UMKM, and local businesses.
+          </p>
+          <p>
+            This portfolio documents my professional journey, selected
+            projects, technical growth, and the lessons I continue to learn
+            across work, study, and freelance practice.
           </p>
         </div>
       </Reveal>

@@ -1,4 +1,4 @@
-import { ArrowUpRight, Github, Linkedin, Twitter } from "lucide-react";
+import { ArrowUpRight, Github } from "lucide-react";
 import { person } from "@/data/person";
 import { socials } from "@/data/social";
 import { SectionHeading } from "@/components/section-heading";
@@ -7,11 +7,11 @@ import { Button } from "@/components/ui/button";
 
 const socialIcons = {
   GitHub: Github,
-  LinkedIn: Linkedin,
-  "X / Twitter": Twitter,
 } as const;
 
 export function Contact() {
+  const githubUrl = socials.find((s) => s.label === "GitHub")?.href;
+
   return (
     <section
       id="contact"
@@ -30,18 +30,29 @@ export function Contact() {
             index="06"
             eyebrow="Contact"
             title="Let's build something useful."
-            description="I'm currently taking on freelance work. Tell me what you're building — I'll reply within a day."
+            description="I am open to selected freelance projects, professional collaboration, and conversations about frontend development or practical web solutions for local businesses."
             className="mx-auto text-center [&>p]:mx-auto"
           />
         </Reveal>
 
         <Reveal delay={120}>
           <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-            <Button asChild size="lg">
-              <a href={`mailto:${person.email}`}>
-                {person.email}
-                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-              </a>
+            <Button asChild size="lg" variant="accent">
+              {person.email ? (
+                <a href={`mailto:${person.email}`}>
+                  {person.email}
+                  <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                </a>
+              ) : (
+                <a
+                  href={githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  GitHub
+                  <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                </a>
+              )}
             </Button>
             <ul className="flex items-center gap-2">
               {socials.map((social) => {

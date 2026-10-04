@@ -11,47 +11,68 @@ export function Projects() {
         id="projects-title"
         index="03"
         eyebrow="Selected Work"
-        title="Things I've built that still feel fast."
+        title="Things I've built."
       />
 
       <ul className="mt-10 flex flex-col gap-4">
         {projects.map((project, i) => (
           <li key={project.title}>
             <Reveal delay={(i % 2) * 90}>
-              <a
-                href={project.href}
-                className="group block rounded-xl border border-white/[0.07] bg-white/[0.02] p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-white/[0.16] hover:bg-white/[0.045] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:p-7"
-              >
-                <div className="flex flex-col gap-4">
-                  <div className="flex items-baseline justify-between gap-4">
-                    <h3 className="text-xl font-semibold tracking-tight text-foreground">
-                      {project.title}
-                    </h3>
-                    <span className="font-mono text-xs text-metadata">
-                      {project.year}
-                    </span>
-                  </div>
-                  <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
-                    {project.description}
-                  </p>
-                  <div className="mt-1 flex items-center justify-between gap-4">
-                    <ul className="flex flex-wrap gap-1.5">
-                      {project.tech.map((tag) => (
-                        <li key={tag}>
-                          <Badge variant="outline">{tag}</Badge>
-                        </li>
-                      ))}
-                    </ul>
-                    <span
-                      aria-hidden="true"
-                      className="inline-flex shrink-0 items-center gap-1 font-mono text-xs uppercase tracking-widest text-metadata transition-colors group-hover:text-foreground"
-                    >
-                      View
-                      <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                    </span>
-                  </div>
+              <article className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-6 transition-colors duration-300 hover:border-white/[0.16] sm:p-7">
+                <div className="flex items-baseline justify-between gap-4">
+                  <h3 className="text-xl font-semibold tracking-tight text-foreground">
+                    {project.title}
+                  </h3>
+                  <span className="shrink-0 font-mono text-xs uppercase tracking-[0.1em] text-metadata">
+                    {project.status}
+                  </span>
                 </div>
-              </a>
+
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
+                  {project.summary}
+                </p>
+
+                <ul className="mt-4 flex flex-wrap gap-1.5">
+                  {project.stack.map((tag) => (
+                    <li key={tag}>
+                      <Badge variant="outline">{tag}</Badge>
+                    </li>
+                  ))}
+                </ul>
+
+                {(project.liveUrl || project.repositoryUrl) && (
+                  <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2">
+                    {project.liveUrl ? (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group inline-flex items-center gap-1.5 rounded-sm font-mono text-sm uppercase tracking-[0.1em] text-accent underline-offset-8 transition-colors hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                      >
+                        Live demo
+                        <ArrowUpRight
+                          className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                          aria-hidden="true"
+                        />
+                      </a>
+                    ) : null}
+                    {project.repositoryUrl ? (
+                      <a
+                        href={project.repositoryUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group inline-flex items-center gap-1.5 rounded-sm font-mono text-sm uppercase tracking-[0.1em] text-accent underline-offset-8 transition-colors hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                      >
+                        Repository
+                        <ArrowUpRight
+                          className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                          aria-hidden="true"
+                        />
+                      </a>
+                    ) : null}
+                  </div>
+                )}
+              </article>
             </Reveal>
           </li>
         ))}

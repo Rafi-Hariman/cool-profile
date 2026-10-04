@@ -1,4 +1,4 @@
-import { Github, Linkedin, Twitter, FileText, MapPin } from "lucide-react";
+import { Github, FileText, MapPin } from "lucide-react";
 import { person } from "@/data/person";
 import { socials } from "@/data/social";
 import { SidebarNav } from "@/components/layout/sidebar-nav";
@@ -7,8 +7,6 @@ import RobotCard from "@/components/robot-card";
 
 const socialIcons = {
   GitHub: Github,
-  LinkedIn: Linkedin,
-  "X / Twitter": Twitter,
 } as const;
 
 export function Sidebar() {
@@ -55,16 +53,18 @@ export function Sidebar() {
               </li>
             );
           })}
-          <li>
-            <a
-              href={person.resumeUrl}
-              aria-label="Resume (PDF)"
-              title="Resume (PDF)"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/[0.35] bg-white/[0.02] text-metadata transition-colors duration-200 hover:border-white/60 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-            >
-              <FileText className="h-4 w-4" aria-hidden="true" />
-            </a>
-          </li>
+          {person.resumeUrl ? (
+            <li>
+              <a
+                href={person.resumeUrl}
+                aria-label="Resume (PDF)"
+                title="Resume (PDF)"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/[0.35] bg-white/[0.02] text-metadata transition-colors duration-200 hover:border-white/60 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <FileText className="h-4 w-4" aria-hidden="true" />
+              </a>
+            </li>
+          ) : null}
         </ul>
 
         <p className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-metadata">

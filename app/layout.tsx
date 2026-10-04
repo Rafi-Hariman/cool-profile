@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   },
   description: person.tagline,
   keywords: [
-    "frontend engineer",
+    "frontend developer",
     "portfolio",
     person.name.toLowerCase(),
     "react",
@@ -43,15 +43,15 @@ export const viewport: Viewport = {
 
 /** Person structured data (docs/08-SEO). */
 function PersonJsonLd() {
-  const data = {
+  const data: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "Person",
     name: person.name,
     jobTitle: person.role,
     url: person.siteUrl,
-    email: `mailto:${person.email}`,
     sameAs: socials.map((s) => s.href),
   };
+  if (person.email) data.email = `mailto:${person.email}`;
   return (
     <script
       type="application/ld+json"

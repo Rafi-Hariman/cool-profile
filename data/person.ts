@@ -1,22 +1,27 @@
 // Identity & site metadata.
-// SAMPLE — replace with your real information before launch.
+// Verified from the career addendum (2026). Fields left empty are not yet
+// known/verified — they are omitted from the UI rather than guessed.
 export const person = {
-  name: "Adi Pratama",
-  role: "Frontend Engineer",
-  tagline: "I build accessible, performant interfaces that feel like instruments.",
-  // Plain-language summary shown under the About headline. SAMPLE — replace
-  // with one sentence a non-technical client would understand. Rendered only
-  // when non-empty (see components/sections/about.tsx).
+  name: "Muhamad Rafi Hariman Saputra",
+  role: "Frontend Developer at BSI UII",
+  tagline:
+    "Informatics student and freelance web developer building responsive interfaces and practical digital solutions.",
+  // Plain-language summary shown under the About headline (see about.tsx).
   summary:
-    "[One plain-language line: what I build, and who it helps — no jargon.]",
-  availability: "Available for freelance",
+    "I build responsive, maintainable web interfaces — as a frontend developer at BSI UII, an Informatics student, and a freelance web developer.",
+  availability: "Open to Selected Freelance Projects & Collaboration",
   // Label for the primary sidebar CTA (scrolls to the Contact section).
   ctaLabel: "Contact me",
-  location: "Jakarta, ID",
-  email: "hello@adi.dev",
-  resumeUrl: "/resume.pdf",
-  // Replace with the production domain before launch (used for SEO metadata).
-  siteUrl: "https://adi.dev",
+  location: "Yogyakarta, Indonesia",
+  // [NEEDS INPUT] professional email — empty means the Contact CTA falls
+  // back to GitHub instead of a mailto link.
+  email: "",
+  // [NEEDS INPUT] resume — empty hides the resume button.
+  resumeUrl: "",
+  // No production domain yet; the GitHub repo is the only real URL so it
+  // serves as metadataBase/canonical until a domain exists.
+  // [NEEDS INPUT] production domain once deployed.
+  siteUrl: "https://github.com/Rafi-Hariman/cool-profile",
 } as const;
 
 export const navSections = [

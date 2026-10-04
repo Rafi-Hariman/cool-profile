@@ -1,7 +1,5 @@
-// Social & professional links.
-// SAMPLE — replace hrefs with your real profiles.
+// Social & professional links — only real, verified URLs.
+// [NEEDS INPUT] LinkedIn profile URL, if/when available.
 export const socials = [
-  { label: "GitHub", href: "https://github.com" },
-  { label: "LinkedIn", href: "https://linkedin.com" },
-  { label: "X / Twitter", href: "https://x.com" },
+  { label: "GitHub", href: "https://github.com/Rafi-Hariman" },
 ] as const;
