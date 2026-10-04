@@ -29,8 +29,8 @@ Deep-space palette (current identity, kept):
 | `--background` | `228 64% 2%` (≈ #020409) | page background |
 | `--foreground` | `210 20% 98%` | primary text |
 | `--card` | `228 50% 3%` | card surfaces |
-| `--muted-foreground` | `215 15% 68%` | secondary / body text (≈8.9:1) |
-| `--metadata` | `215 15% 58%` | tertiary / labels, dates, meta (≈6.4:1, still ≥ AA) |
+| `--muted-foreground` | `215 15% 71%` | secondary / body text (≈9.7:1) |
+| `--metadata` | `215 15% 62%` | tertiary / labels, dates, meta (≈7.4:1, still ≥ AA) |
 | `--border` | `228 18% 12%` | subtle borders |
 | `--accent` | `199 89% 48%` (cyan) | interactive accents, active nav, icons |
 | `--ring` | same as accent | focus rings |

@@ -46,7 +46,7 @@ export function Sidebar() {
                   rel="noopener noreferrer"
                   aria-label={`${social.label} profile`}
                   title={`${social.label} — opens in new tab`}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.02] text-metadata transition-colors duration-200 hover:border-white/25 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/[0.35] bg-white/[0.02] text-metadata transition-colors duration-200 hover:border-white/60 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
                   {Icon ? (
                     <Icon className="h-4 w-4" aria-hidden="true" />
@@ -60,7 +60,7 @@ export function Sidebar() {
               href={person.resumeUrl}
               aria-label="Resume (PDF)"
               title="Resume (PDF)"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.02] text-metadata transition-colors duration-200 hover:border-white/25 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/[0.35] bg-white/[0.02] text-metadata transition-colors duration-200 hover:border-white/60 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <FileText className="h-4 w-4" aria-hidden="true" />
             </a>
