@@ -21,7 +21,7 @@ export function SectionHeading({
   return (
     <div className={cn("max-w-2xl", className)}>
       <p className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.12em] text-accent">
-        <span aria-hidden="true" className="text-white/30">
+        <span aria-hidden="true" className="text-metadata">
           {index}
         </span>
         <span aria-hidden="true" className="h-px w-10 bg-accent/50" />

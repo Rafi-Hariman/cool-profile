@@ -29,8 +29,8 @@ Deep-space palette (current identity, kept):
 | `--background` | `228 64% 2%` (≈ #020409) | page background |
 | `--foreground` | `210 20% 98%` | primary text |
 | `--card` | `228 50% 3%` | card surfaces |
-| `--muted-foreground` | `215 15% 66%` | secondary / body text (≈8.4:1) |
-| `--metadata` | `215 15% 55%` | tertiary / labels, dates, meta (≈5.8:1, still ≥ AA) |
+| `--muted-foreground` | `215 15% 68%` | secondary / body text (≈8.9:1) |
+| `--metadata` | `215 15% 58%` | tertiary / labels, dates, meta (≈6.4:1, still ≥ AA) |
 | `--border` | `228 18% 12%` | subtle borders |
 | `--accent` | `199 89% 48%` (cyan) | interactive accents, active nav, icons |
 | `--ring` | same as accent | focus rings |
@@ -53,20 +53,21 @@ Both loaded via `next/font` in `components/fonts.ts` with `display: swap`.
 
 Type scale (fluid where useful):
 
-- Display / hero identity: `text-3xl → text-5xl` bold, tight tracking
-- H2 (section titles): `text-2xl sm:text-3xl` semibold
-- H3 (entry titles): `text-xl` semibold
-- Body: `text-base sm:text-lg`, relaxed leading
-- Small: `text-sm`
-- Micro (eyebrow, metadata): `text-xs` mono, uppercase, `tracking-[0.12em]`
+| Tier | Classes | Use |
+|---|---|---|
+| `display` | `text-3xl → text-5xl` bold, tight tracking | section headings (`h2`) |
+| `lead` | `text-xl sm:text-2xl` | the plain-language summary line |
+| `body` | `text-base sm:text-lg`, `leading-[1.7]` | paragraphs, descriptions |
+| `meta` | `text-xs` mono, uppercase, `tracking-[0.12em]` | eyebrows, dates, labels |
 
 Three text tiers — primary `--foreground`, secondary `--muted-foreground`
-(body), tertiary `--metadata` (labels/dates/meta). Every informational tier
-passes WCAG AA; `text-xs` (12px) is the minimum size for any label. Wide
-`0.25–0.4em` letter-spacing is reserved for rare display accents, never for
-body-adjacent labels.
+(body), tertiary `--metadata` (meta). Every informational tier passes WCAG
+AA; `text-xs` (12px) is the minimum size for any label. `lead` must be
+clearly larger than `body` so it reads as a lead, not a brighter body line.
+Wide `0.25–0.4em` letter-spacing is reserved for rare display accents,
+never for body-adjacent labels.
 
-Line height: headings 1.1–1.2, body 1.6–1.8.
+Line height: headings 1.1–1.2, body 1.65–1.75.
 
 ---
 

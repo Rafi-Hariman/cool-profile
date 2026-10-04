@@ -23,10 +23,10 @@
     --secondary-foreground: 210 20% 98%;
 
     --muted: 230 15% 10%;
-    --muted-foreground: 215 15% 66%;
-    /* Tertiary text tier — labels, dates, meta. Still ≥ AA (≈5.8:1 on the
+    --muted-foreground: 215 15% 68%;
+    /* Tertiary text tier — labels, dates, meta. Still ≥ AA (≈6.4:1 on the
        page background) but clearly quieter than body copy. */
-    --metadata: 215 15% 55%;
+    --metadata: 215 15% 58%;
 
     --accent: 199 89% 48%;
     --accent-foreground: 228 64% 2%;
@@ -179,16 +179,16 @@
     }
   }
 
-  /* Aurora margin strips fade toward the centered content column so the
-     streaks read as framing, never competing with the text (docs/10-MOTION
-     exception #3). */
+  /* Aurora margin strips fade smoothly toward the centered content column
+     so the streaks read as framing, never as a hard vertical band
+     (docs/10-MOTION exception #3). */
   .shader-fade-l {
-    -webkit-mask-image: linear-gradient(to right, #000 55%, transparent 98%);
-    mask-image: linear-gradient(to right, #000 55%, transparent 98%);
+    -webkit-mask-image: linear-gradient(to right, #000 10%, transparent 100%);
+    mask-image: linear-gradient(to right, #000 10%, transparent 100%);
   }
 
   .shader-fade-r {
-    -webkit-mask-image: linear-gradient(to left, #000 55%, transparent 98%);
-    mask-image: linear-gradient(to left, #000 55%, transparent 98%);
+    -webkit-mask-image: linear-gradient(to left, #000 10%, transparent 100%);
+    mask-image: linear-gradient(to left, #000 10%, transparent 100%);
   }
 }

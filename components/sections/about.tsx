@@ -15,14 +15,14 @@ export function About() {
 
       {person.summary ? (
         <Reveal className="mt-6">
-          <p className="max-w-prose text-lg leading-relaxed text-foreground sm:text-xl">
+          <p className="max-w-prose text-xl leading-relaxed text-foreground sm:text-2xl">
             {person.summary}
           </p>
         </Reveal>
       ) : null}
 
       <Reveal className="mt-8">
-        <div className="flex max-w-prose flex-col gap-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
+        <div className="flex max-w-prose flex-col gap-5 text-base leading-[1.7] text-muted-foreground sm:text-lg">
           <p>
             I&apos;m a frontend engineer who cares about the details other
             people scroll past — frame budgets, spring curves, token
@@ -45,11 +45,11 @@ export function About() {
       <Reveal className="mt-8">
         <a
           href="#projects"
-          className="group inline-flex items-center gap-2 rounded font-mono text-xs uppercase tracking-[0.12em] text-accent transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="group inline-flex items-center gap-2 rounded-sm font-mono text-sm uppercase tracking-[0.1em] text-accent underline-offset-8 transition-colors hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           Selected work
           <ArrowDown
-            className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-y-0.5"
+            className="h-4 w-4 transition-transform duration-300 group-hover:translate-y-1"
             aria-hidden="true"
           />
         </a>

@@ -19,7 +19,7 @@ export function Skills() {
             <Reveal delay={i * 100}>
               <div className="flex h-full flex-col rounded-xl border border-white/[0.07] bg-white/[0.02] p-6 transition-colors duration-300 hover:border-white/[0.16]">
                 <p className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.3em] text-accent">
-                  <span aria-hidden="true" className="text-white/30">
+                  <span aria-hidden="true" className="text-metadata">
                     0{i + 1}
                   </span>
                   {group.label}

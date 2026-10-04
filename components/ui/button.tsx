@@ -10,6 +10,8 @@ const buttonVariants = cva(
       variant: {
         default:
           "gradient-border gradient-fill gradient-shine text-foreground shadow-[0_0_28px_-10px_hsl(0_0%_100%_/_0.4)] hover:shadow-[0_0_34px_-8px_hsl(0_0%_100%_/_0.5)]",
+        accent:
+          "bg-accent text-accent-foreground shadow-lg shadow-accent/25 hover:bg-accent/90 active:bg-accent/80",
         outline:
           "gradient-border bg-white/[0.02] text-foreground hover:bg-white/[0.06]",
         ghost: "text-foreground hover:bg-white/[0.06]",

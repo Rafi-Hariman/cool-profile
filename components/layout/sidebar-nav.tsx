@@ -28,7 +28,7 @@ export function SidebarNav() {
                   className={`h-px transition-all duration-200 ${
                     isActive
                       ? "w-8 bg-accent"
-                      : "w-4 bg-white/25 group-hover:w-6 group-hover:bg-white/50"
+                      : "w-4 bg-white/50 group-hover:w-6 group-hover:bg-white/70"
                   }`}
                 />
                 <span className={isActive ? "text-accent" : undefined}>

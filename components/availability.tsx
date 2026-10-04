@@ -15,7 +15,7 @@ export function Availability() {
         </span>
         {person.availability}
       </p>
-      <Button asChild size="sm" className="w-full">
+      <Button asChild variant="accent" className="w-full">
         <a href="#contact">{person.ctaLabel}</a>
       </Button>
     </div>
