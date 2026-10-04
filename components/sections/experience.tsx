@@ -17,7 +17,7 @@ export function Experience() {
           <li key={`${job.company}-${job.period}`}>
             <Reveal delay={i * 80}>
               <article className="grid gap-3 border-l border-white/[0.08] py-6 pl-6 sm:grid-cols-12 sm:gap-6">
-                <p className="font-mono text-xs uppercase tracking-[0.25em] text-white/40 sm:col-span-3">
+                <p className="font-mono text-xs uppercase tracking-[0.12em] text-metadata sm:col-span-3">
                   {job.period}
                 </p>
                 <div className="sm:col-span-9">

@@ -39,7 +39,7 @@ export function SidebarNav() {
               <a
                 href={`#${section.id}`}
                 aria-current={isActive ? "true" : undefined}
-                className="group flex items-center gap-3 rounded py-1.5 pr-2 font-mono text-xs uppercase tracking-[0.25em] text-white/50 transition-colors duration-200 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="group flex items-center gap-3 rounded py-1.5 pr-2 font-mono text-xs uppercase tracking-[0.12em] text-metadata transition-colors duration-200 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <span
                   aria-hidden="true"

@@ -73,10 +73,10 @@ export default function RobotCard({ className }: RobotCardProps) {
         </>
       ) : (
         <div className="relative flex h-full w-full flex-col items-center justify-center gap-2 px-6 text-center">
-          <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-white/40">
+          <span className="font-mono text-xs uppercase tracking-[0.12em] text-metadata">
             Interactive 3D
           </span>
-          <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-accent/70">
+          <span className="font-mono text-xs uppercase tracking-[0.12em] text-accent">
             available on desktop
           </span>
         </div>

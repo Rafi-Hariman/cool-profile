@@ -23,7 +23,10 @@
     --secondary-foreground: 210 20% 98%;
 
     --muted: 230 15% 10%;
-    --muted-foreground: 215 16% 60%;
+    --muted-foreground: 215 15% 66%;
+    /* Tertiary text tier — labels, dates, meta. Still ≥ AA (≈5.8:1 on the
+       page background) but clearly quieter than body copy. */
+    --metadata: 215 15% 55%;
 
     --accent: 199 89% 48%;
     --accent-foreground: 228 64% 2%;

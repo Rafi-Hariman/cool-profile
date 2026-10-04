@@ -9,7 +9,7 @@ export function MobileHeader() {
         <p className="text-lg font-bold tracking-tight text-foreground">
           {person.name}
         </p>
-        <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
+        <p className="font-mono text-xs uppercase tracking-[0.12em] text-accent">
           {person.role}
         </p>
       </div>
@@ -19,7 +19,7 @@ export function MobileHeader() {
             <li key={section.id}>
               <a
                 href={`#${section.id}`}
-                className="whitespace-nowrap font-mono text-[11px] uppercase tracking-[0.2em] text-white/50 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="whitespace-nowrap font-mono text-xs uppercase tracking-[0.12em] text-metadata transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 {section.label}
               </a>

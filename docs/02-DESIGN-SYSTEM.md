@@ -29,7 +29,8 @@ Deep-space palette (current identity, kept):
 | `--background` | `228 64% 2%` (≈ #020409) | page background |
 | `--foreground` | `210 20% 98%` | primary text |
 | `--card` | `228 50% 3%` | card surfaces |
-| `--muted-foreground` | `215 16% 60%` | secondary text |
+| `--muted-foreground` | `215 15% 66%` | secondary / body text (≈8.4:1) |
+| `--metadata` | `215 15% 55%` | tertiary / labels, dates, meta (≈5.8:1, still ≥ AA) |
 | `--border` | `228 18% 12%` | subtle borders |
 | `--accent` | `199 89% 48%` (cyan) | interactive accents, active nav, icons |
 | `--ring` | same as accent | focus rings |
@@ -57,7 +58,13 @@ Type scale (fluid where useful):
 - H3 (entry titles): `text-xl` semibold
 - Body: `text-base sm:text-lg`, relaxed leading
 - Small: `text-sm`
-- Micro (eyebrow, metadata): `text-xs`, mono, uppercase, wide tracking
+- Micro (eyebrow, metadata): `text-xs` mono, uppercase, `tracking-[0.12em]`
+
+Three text tiers — primary `--foreground`, secondary `--muted-foreground`
+(body), tertiary `--metadata` (labels/dates/meta). Every informational tier
+passes WCAG AA; `text-xs` (12px) is the minimum size for any label. Wide
+`0.25–0.4em` letter-spacing is reserved for rare display accents, never for
+body-adjacent labels.
 
 Line height: headings 1.1–1.2, body 1.6–1.8.
 

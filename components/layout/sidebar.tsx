@@ -18,7 +18,7 @@ export function Sidebar() {
         <h1 className="text-3xl font-bold tracking-tight text-foreground">
           {person.name}
         </h1>
-        <p className="mt-1 font-mono text-xs uppercase tracking-[0.3em] text-accent">
+        <p className="mt-1 font-mono text-xs uppercase tracking-[0.12em] text-accent">
           {person.role}
         </p>
         <p className="mt-5 max-w-xs text-sm leading-relaxed text-muted-foreground">
@@ -41,7 +41,7 @@ export function Sidebar() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${social.label} profile`}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.02] text-white/60 transition-colors duration-200 hover:border-white/25 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.02] text-metadata transition-colors duration-200 hover:border-white/25 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
                   {Icon ? (
                     <Icon className="h-4 w-4" aria-hidden="true" />
@@ -54,14 +54,14 @@ export function Sidebar() {
             <a
               href={person.resumeUrl}
               aria-label="Resume (PDF)"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.02] text-white/60 transition-colors duration-200 hover:border-white/25 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.02] text-metadata transition-colors duration-200 hover:border-white/25 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <FileText className="h-4 w-4" aria-hidden="true" />
             </a>
           </li>
         </ul>
 
-        <p className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-white/40">
+        <p className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-metadata">
           <MapPin className="h-3.5 w-3.5 text-accent" aria-hidden="true" />
           {person.location}
           <span aria-hidden="true" className="text-white/20">/</span>

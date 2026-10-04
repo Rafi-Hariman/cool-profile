@@ -16,7 +16,7 @@ export default function Home() {
       <Writing />
       <Contact />
       <footer className="border-t border-white/[0.05] py-8">
-        <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-white/30">
+        <p className="font-mono text-xs uppercase tracking-[0.12em] text-metadata">
           © {new Date().getFullYear()} — built with Next.js, Tailwind & a
           small robot
         </p>

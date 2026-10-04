@@ -26,7 +26,7 @@ export function Projects() {
                     <h3 className="text-xl font-semibold tracking-tight text-foreground">
                       {project.title}
                     </h3>
-                    <span className="font-mono text-xs text-white/35">
+                    <span className="font-mono text-xs text-metadata">
                       {project.year}
                     </span>
                   </div>
@@ -43,7 +43,7 @@ export function Projects() {
                     </ul>
                     <span
                       aria-hidden="true"
-                      className="inline-flex shrink-0 items-center gap-1 font-mono text-[11px] uppercase tracking-widest text-white/40 transition-colors group-hover:text-foreground"
+                      className="inline-flex shrink-0 items-center gap-1 font-mono text-xs uppercase tracking-widest text-metadata transition-colors group-hover:text-foreground"
                     >
                       View
                       <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />

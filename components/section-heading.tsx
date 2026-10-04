@@ -17,7 +17,7 @@ export function SectionHeading({
 }: SectionHeadingProps) {
   return (
     <div className={cn("max-w-2xl", className)}>
-      <p className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.35em] text-accent">
+      <p className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.12em] text-accent">
         <span aria-hidden="true" className="text-white/30">
           {index}
         </span>

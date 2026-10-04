@@ -39,7 +39,7 @@ export function Writing() {
                 </span>
                 <span className="flex items-baseline gap-4 text-sm text-muted-foreground">
                   {article.description}
-                  <span className="font-mono text-xs text-white/35">
+                  <span className="font-mono text-xs text-metadata">
                     {article.year}
                   </span>
                 </span>
