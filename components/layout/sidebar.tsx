@@ -12,7 +12,7 @@ const socialIcons = {
 
 export function Sidebar() {
   return (
-    <div className="flex h-full flex-col gap-10 py-12 pr-10">
+    <div className="flex h-full flex-col gap-8 py-8 pr-10">
       {/* Identity */}
       <div>
         <h1 className="text-3xl font-bold tracking-tight text-foreground">
@@ -21,7 +21,7 @@ export function Sidebar() {
         <p className="mt-1 font-mono text-xs uppercase tracking-[0.12em] text-accent">
           {person.role}
         </p>
-        <p className="mt-5 max-w-xs text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
           {person.tagline}
         </p>
       </div>
@@ -30,7 +30,7 @@ export function Sidebar() {
       <SidebarNav />
 
       {/* Socials + resume */}
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-3">
         <ul className="flex items-center gap-2">
           {socials.map((social) => {
             const Icon = socialIcons[social.label];
@@ -41,6 +41,7 @@ export function Sidebar() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${social.label} profile`}
+                  title={`${social.label} — opens in new tab`}
                   className="flex h-10 w-10 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.02] text-metadata transition-colors duration-200 hover:border-white/25 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
                   {Icon ? (
@@ -54,6 +55,7 @@ export function Sidebar() {
             <a
               href={person.resumeUrl}
               aria-label="Resume (PDF)"
+              title="Resume (PDF)"
               className="flex h-10 w-10 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.02] text-metadata transition-colors duration-200 hover:border-white/25 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <FileText className="h-4 w-4" aria-hidden="true" />
@@ -70,7 +72,7 @@ export function Sidebar() {
       </div>
 
       {/* Signature 3D card — desktop-only, lazy, contained (docs/07) */}
-      <div className="mt-auto hidden lg:block">
+      <div className="mt-auto">
         <RobotCard />
       </div>
     </div>

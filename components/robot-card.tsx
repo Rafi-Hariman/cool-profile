@@ -43,7 +43,7 @@ export default function RobotCard({ className }: RobotCardProps) {
   return (
     <Card
       className={cn(
-        "relative h-[280px] w-full overflow-hidden rounded-2xl border border-white/[0.08] bg-[#04060c]",
+        "relative h-[200px] w-full overflow-hidden rounded-2xl border border-white/[0.08] bg-[#04060c]",
         className
       )}
     >
