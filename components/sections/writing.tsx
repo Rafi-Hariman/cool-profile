@@ -13,8 +13,9 @@ export function Writing() {
   if (articles.length === 0) return null;
 
   return (
-    <section id="writing" className="scroll-mt-24 border-t border-white/[0.05] py-16 sm:py-24">
+    <section id="writing" aria-labelledby="writing-title" className="scroll-mt-24 border-t border-white/[0.05] py-16 sm:py-24">
       <SectionHeading
+        id="writing-title"
         index="05"
         eyebrow="Writing"
         title="Notes from the build."

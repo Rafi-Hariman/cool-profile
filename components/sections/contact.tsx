@@ -15,6 +15,7 @@ export function Contact() {
   return (
     <section
       id="contact"
+      aria-labelledby="contact-title"
       className="relative scroll-mt-24 overflow-hidden border-t border-white/[0.05] py-16 sm:py-24"
     >
       <div
@@ -25,6 +26,7 @@ export function Contact() {
       <div className="relative">
         <Reveal>
           <SectionHeading
+            id="contact-title"
             index="06"
             eyebrow="Contact"
             title="Let's build something useful."

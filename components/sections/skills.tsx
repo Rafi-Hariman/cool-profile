@@ -4,8 +4,9 @@ import Reveal from "@/components/reveal";
 
 export function Skills() {
   return (
-    <section id="skills" className="scroll-mt-24 border-t border-white/[0.05] py-16 sm:py-24">
+    <section id="skills" aria-labelledby="skills-title" className="scroll-mt-24 border-t border-white/[0.05] py-16 sm:py-24">
       <SectionHeading
+        id="skills-title"
         index="04"
         eyebrow="Skills"
         title="Tools I reach for without thinking."

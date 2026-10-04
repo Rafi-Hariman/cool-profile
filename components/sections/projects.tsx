@@ -6,8 +6,9 @@ import { Badge } from "@/components/ui/badge";
 
 export function Projects() {
   return (
-    <section id="projects" className="scroll-mt-24 border-t border-white/[0.05] py-16 sm:py-24">
+    <section id="projects" aria-labelledby="projects-title" className="scroll-mt-24 border-t border-white/[0.05] py-16 sm:py-24">
       <SectionHeading
+        id="projects-title"
         index="03"
         eyebrow="Selected Work"
         title="Things I've built that still feel fast."

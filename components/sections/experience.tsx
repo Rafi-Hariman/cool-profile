@@ -5,8 +5,9 @@ import { Badge } from "@/components/ui/badge";
 
 export function Experience() {
   return (
-    <section id="experience" className="scroll-mt-24 border-t border-white/[0.05] py-16 sm:py-24">
+    <section id="experience" aria-labelledby="experience-title" className="scroll-mt-24 border-t border-white/[0.05] py-16 sm:py-24">
       <SectionHeading
+        id="experience-title"
         index="02"
         eyebrow="Experience"
         title="Where I've worked."

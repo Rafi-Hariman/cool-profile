@@ -5,6 +5,8 @@ interface SectionHeadingProps {
   eyebrow: string;
   title: string;
   description?: string;
+  /** id for the heading, referenced by the section's aria-labelledby */
+  id?: string;
   className?: string;
 }
 
@@ -13,6 +15,7 @@ export function SectionHeading({
   eyebrow,
   title,
   description,
+  id,
   className,
 }: SectionHeadingProps) {
   return (
@@ -24,7 +27,10 @@ export function SectionHeading({
         <span aria-hidden="true" className="h-px w-10 bg-accent/50" />
         {eyebrow}
       </p>
-      <h2 className="mt-5 text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl">
+      <h2
+        id={id}
+        className="mt-5 text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl"
+      >
         {title}
       </h2>
       {description ? (

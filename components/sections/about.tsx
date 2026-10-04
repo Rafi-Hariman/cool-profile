@@ -5,8 +5,9 @@ import Reveal from "@/components/reveal";
 
 export function About() {
   return (
-    <section id="about" className="scroll-mt-24 py-16 sm:py-24 lg:py-12 lg:pt-24">
+    <section id="about" aria-labelledby="about-title" className="scroll-mt-24 py-16 sm:py-24 lg:py-12 lg:pt-24">
       <SectionHeading
+        id="about-title"
         index="01"
         eyebrow="About"
         title="Engineer first, pixel-second."
