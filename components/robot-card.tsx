@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, lazy, useEffect, useState } from "react";
+import { Suspense, lazy, useEffect, useRef, useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Spotlight } from "@/components/ui/spotlight";
 import { cn } from "@/lib/utils";
@@ -18,11 +18,14 @@ interface RobotCardProps {
 /**
  * The site's signature element: a compact interactive 3D robot with a
  * cursor spotlight, contained in a card (docs/10-MOTION sanctioned
- * exception). Rendered desktop-only by its usage site; also skips the
- * heavy scene on touch devices, which cannot hover anyway.
+ * exception). Skips the heavy scene on touch devices (no hover) and under
+ * reduced motion, and defers the download until the card actually scrolls
+ * near the viewport (it sits at the bottom of the sidebar).
  */
 export default function RobotCard({ className }: RobotCardProps) {
+  const cardRef = useRef<HTMLDivElement | null>(null);
   const [canHover, setCanHover] = useState(false);
+  const [inView, setInView] = useState(false);
 
   useEffect(() => {
     // Coarse pointer (touch) or reduced motion → skip the WebGL scene,
@@ -40,10 +43,33 @@ export default function RobotCard({ className }: RobotCardProps) {
     };
   }, []);
 
+  useEffect(() => {
+    const el = cardRef.current;
+    if (!el) return;
+    if (!("IntersectionObserver" in window)) {
+      setInView(true);
+      return;
+    }
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "120px 0px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  const showScene = canHover && inView;
+
   return (
     <Card
+      ref={cardRef}
       className={cn(
-        "relative h-[200px] w-full overflow-hidden rounded-2xl border border-white/[0.08] bg-[#04060c]",
+        "relative h-[200px] w-full overflow-hidden rounded-xl border border-white/[0.07] bg-[#04060c]",
         className
       )}
     >
@@ -53,7 +79,7 @@ export default function RobotCard({ className }: RobotCardProps) {
         className="absolute inset-0 bg-[radial-gradient(120%_80%_at_50%_0%,hsl(199_89%_48%_/_0.1),transparent_60%)]"
       />
 
-      {canHover ? (
+      {showScene ? (
         <>
           <Spotlight
             size={280}
@@ -71,7 +97,7 @@ export default function RobotCard({ className }: RobotCardProps) {
             </Suspense>
           </div>
         </>
-      ) : (
+      ) : !canHover ? (
         <div className="relative flex h-full w-full flex-col items-center justify-center gap-2 px-6 text-center">
           <span className="font-mono text-xs uppercase tracking-[0.12em] text-metadata">
             Interactive 3D
@@ -80,7 +106,7 @@ export default function RobotCard({ className }: RobotCardProps) {
             available on desktop
           </span>
         </div>
-      )}
+      ) : null}
 
       {/* Fade the scene floor into the card's own background */}
       <div

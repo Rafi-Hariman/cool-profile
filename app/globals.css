@@ -178,4 +178,17 @@
       transition: none;
     }
   }
+
+  /* Aurora margin strips fade toward the centered content column so the
+     streaks read as framing, never competing with the text (docs/10-MOTION
+     exception #3). */
+  .shader-fade-l {
+    -webkit-mask-image: linear-gradient(to right, #000 55%, transparent 98%);
+    mask-image: linear-gradient(to right, #000 55%, transparent 98%);
+  }
+
+  .shader-fade-r {
+    -webkit-mask-image: linear-gradient(to left, #000 55%, transparent 98%);
+    mask-image: linear-gradient(to left, #000 55%, transparent 98%);
+  }
 }

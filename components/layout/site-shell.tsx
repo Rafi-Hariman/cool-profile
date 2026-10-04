@@ -23,15 +23,17 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
       {/* Aurora shader background framing the left + right margins (xl+) —
           symmetric strips that pull the eye toward the centered content
           column. Decorative only, never intercepts the cursor; fixed so
-          each strip persists the whole scroll length
-          (docs/10-MOTION exception #3). */}
-      {(["left-0", "right-0"] as const).map((side) => (
+          each strip persists the whole scroll length. Each strip fades
+          toward the content column (docs/10-MOTION exception #3). */}
+      {(["left", "right"] as const).map((side) => (
         <div
           key={side}
           aria-hidden="true"
-          className={`pointer-events-none fixed top-0 z-0 hidden h-screen w-[calc((100%-72rem)/2)] xl:block ${side}`}
+          className={`pointer-events-none fixed top-0 z-0 hidden h-screen w-[calc((100%-72rem)/2)] xl:block ${side}-0 ${
+            side === "left" ? "shader-fade-l" : "shader-fade-r"
+          }`}
         >
-          <AnimatedShaderBackground className="opacity-60" />
+          <AnimatedShaderBackground className="opacity-45" />
         </div>
       ))}
 

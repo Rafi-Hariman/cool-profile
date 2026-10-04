@@ -119,6 +119,7 @@ export default function AnimatedShaderBackground({
 
     let frameId = 0;
     let disposed = false;
+    let running = false;
     let cleanup: (() => void) | undefined;
 
     // Lazy import: three (~600KB) never touches the server bundle and
@@ -132,7 +133,11 @@ export default function AnimatedShaderBackground({
 
         let renderer: ThreeTypes.WebGLRenderer;
         try {
-          renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+          // A full-quad shader has no geometric edges to antialias, and
+          // capping the pixel ratio keeps the two margin strips from
+          // rendering 4x pixels on retina displays.
+          renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true });
+          renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
         } catch {
           return; // no WebGL — quiet fallback stays visible
         }
@@ -142,7 +147,6 @@ export default function AnimatedShaderBackground({
         // would be pushed below the visible strip.
         const width = () => Math.max(1, container.clientWidth);
         const height = () => Math.max(1, container.clientHeight);
-        renderer.setSize(width(), height());
         renderer.domElement.style.position = "absolute";
         renderer.domElement.style.inset = "0";
         renderer.domElement.style.display = "block";
@@ -151,7 +155,7 @@ export default function AnimatedShaderBackground({
         const material = new THREE.ShaderMaterial({
           uniforms: {
             iTime: { value: 0 },
-            iResolution: { value: new THREE.Vector2(width(), height()) },
+            iResolution: { value: new THREE.Vector2(1, 1) },
           },
           vertexShader: VERTEX_SHADER,
           fragmentShader: FRAGMENT_SHADER,
@@ -161,22 +165,47 @@ export default function AnimatedShaderBackground({
         const mesh = new THREE.Mesh(geometry, material);
         scene.add(mesh);
 
-        const animate = () => {
+        // iResolution must match the drawing buffer (device pixels), not
+        // the CSS size, because gl_FragCoord is in device pixels.
+        const resize = () => {
+          renderer.setSize(width(), height(), false);
+          const size = new THREE.Vector2();
+          renderer.getDrawingBufferSize(size);
+          material.uniforms.iResolution.value.copy(size);
+        };
+        resize();
+
+        const tick = () => {
           material.uniforms.iTime.value += 0.016;
           renderer.render(scene, camera);
-          frameId = requestAnimationFrame(animate);
+          frameId = requestAnimationFrame(tick);
         };
-        animate();
+        const start = () => {
+          if (running) return;
+          running = true;
+          tick();
+        };
+        const stop = () => {
+          running = false;
+          cancelAnimationFrame(frameId);
+        };
+        start();
 
-        const handleResize = () => {
-          renderer.setSize(width(), height());
-          material.uniforms.iResolution.value.set(width(), height());
+        // Pause the render loop entirely while the tab is hidden — the
+        // browser throttles RAF anyway, but this also drops the CPU cost of
+        // scheduling callbacks in the background.
+        const handleVisibility = () => {
+          if (document.hidden) stop();
+          else start();
         };
-        const observer = new ResizeObserver(handleResize);
+        document.addEventListener("visibilitychange", handleVisibility);
+
+        const observer = new ResizeObserver(resize);
         observer.observe(container);
 
         cleanup = () => {
-          cancelAnimationFrame(frameId);
+          stop();
+          document.removeEventListener("visibilitychange", handleVisibility);
           observer.disconnect();
           container.removeChild(renderer.domElement);
           geometry.dispose();

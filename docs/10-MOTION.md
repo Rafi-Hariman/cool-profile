@@ -21,8 +21,9 @@ The generic rules below forbid "unnecessary 3D", "cursor trails", and
 agreed with the owner:
 
 1. **The Spline robot card** (sidebar signature). Interactive 3D, one
-   scene, contained in a small card. Mitigations: desktop-only, lazy,
-   reduced-motion aware. It is the site's identity element, not
+   scene, contained in a small card. Mitigations: desktop-only,
+   viewport-gated lazy load (the scene only downloads once the card scrolls
+   near view), reduced-motion aware. It is the site's identity element, not
    decoration.
 
 2. **The cursor Spotlight inside the robot card.** A radial glow that
@@ -42,8 +43,10 @@ agreed with the owner:
    lazy `import("three")` (the ~600KB library is never in the server bundle
    or the initial client chunk), a static gradient fallback for WebGL
    failure, static frame skipped entirely for touch/coarse pointers and
-   prefers-reduced-motion, and `opacity-60` so it reads as texture rather
-   than content.
+   prefers-reduced-motion, `opacity-45` with a mask that fades each strip
+   toward the content column, pixel ratio capped at 1.5 (antialias off — a
+   full-quad shader has no geometric edges), and a render loop that pauses
+   on `visibilitychange` so hidden tabs burn no CPU.
 
 These exceptions do NOT extend to other elements. No second 3D scene, no
 page-wide cursor glow beyond the margin strip, no particle systems
