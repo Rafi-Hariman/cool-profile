@@ -30,16 +30,18 @@ agreed with the owner:
    the card (never page-wide), spring-smoothed, transform/opacity only,
    fades on mouseleave, disabled under prefers-reduced-motion.
 
-3. **The aurora shader background in the right margin** (xl+ only,
+3. **The aurora shader background in the left and right margins** (xl+ only,
    `components/ui/animated-shader-background.tsx`, mounted by SiteShell).
-   A full-quad GLSL shader (fbm noise + aurora trails) driven by three.js.
+   Two symmetric strips frame the centered content column and pull the eye
+   toward it. A full-quad GLSL shader (fbm noise + aurora trails) driven by
+   three.js.
    Mitigations: rendered only where a real page margin exists (`xl:` and
    up, width `calc((100% - 72rem) / 2)`), `pointer-events-none` (it can
    never intercept clicks or steal hover), `position: fixed` (one canvas
-   for the whole scroll length — not one per section), lazy `import("three")`
-   (the ~600KB library is never in the server bundle or the initial
-   client chunk), a static gradient fallback for WebGL failure, static
-   frame skipped entirely for touch/coarse pointers and
+   per margin strip for the whole scroll length — not one per section),
+   lazy `import("three")` (the ~600KB library is never in the server bundle
+   or the initial client chunk), a static gradient fallback for WebGL
+   failure, static frame skipped entirely for touch/coarse pointers and
    prefers-reduced-motion, and `opacity-60` so it reads as texture rather
    than content.
 

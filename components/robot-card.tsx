@@ -55,7 +55,10 @@ export default function RobotCard({ className }: RobotCardProps) {
 
       {canHover ? (
         <>
-          <Spotlight size={280} springOptions={{ bounce: 0 }} />
+          <Spotlight
+            size={280}
+            springOptions={{ stiffness: 400, damping: 40, mass: 0.4, bounce: 0 }}
+          />
           <div className="relative h-full w-full">
             <Suspense
               fallback={

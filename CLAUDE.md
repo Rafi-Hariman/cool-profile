@@ -119,12 +119,13 @@ These decisions override the generic docs where stated. They are deliberate, not
    GPU-friendly (transform/opacity only), and fades on mouseleave.
 
 4. **Aurora shader background.** The three.js GLSL aurora
-   (`components/ui/animated-shader-background.tsx`) filling the RIGHT page
-   margin on `xl+` screens is exempt from the "no animated backgrounds"
-   rule. Mitigations: margin-only (never under content),
-   pointer-events-none, fixed single canvas, lazy three.js import, static
-   gradient fallback, skipped on touch devices and prefers-reduced-motion
-   (see docs/10-MOTION.md).
+   (`components/ui/animated-shader-background.tsx`) filling the LEFT and
+   RIGHT page margins on `xl+` screens is exempt from the "no animated
+   backgrounds" rule. The symmetric strips frame the centered content
+   column and pull the eye toward it. Mitigations: margin-only (never under
+   content), pointer-events-none, fixed single canvas per strip, lazy
+   three.js import, static gradient fallback, skipped on touch devices and
+   prefers-reduced-motion (see docs/10-MOTION.md).
 
 ---
 

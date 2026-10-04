@@ -20,15 +20,20 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
 
       <MobileHeader />
 
-      {/* Aurora shader background filling the right margin (xl+) —
-          decorative only, never intercepts the cursor. Fixed so the strip
-          persists the whole scroll length (docs/10-MOTION exception #3). */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none fixed right-0 top-0 z-0 hidden h-screen w-[calc((100%-72rem)/2)] xl:block"
-      >
-        <AnimatedShaderBackground className="opacity-60" />
-      </div>
+      {/* Aurora shader background framing the left + right margins (xl+) —
+          symmetric strips that pull the eye toward the centered content
+          column. Decorative only, never intercepts the cursor; fixed so
+          each strip persists the whole scroll length
+          (docs/10-MOTION exception #3). */}
+      {(["left-0", "right-0"] as const).map((side) => (
+        <div
+          key={side}
+          aria-hidden="true"
+          className={`pointer-events-none fixed top-0 z-0 hidden h-screen w-[calc((100%-72rem)/2)] xl:block ${side}`}
+        >
+          <AnimatedShaderBackground className="opacity-60" />
+        </div>
+      ))}
 
       <div className="mx-auto flex w-full max-w-6xl px-6 sm:px-8 lg:gap-0">
         {/* Sticky identity panel — desktop */}
