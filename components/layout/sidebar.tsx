@@ -2,6 +2,7 @@ import { Github, Linkedin, Twitter, FileText, MapPin } from "lucide-react";
 import { person } from "@/data/person";
 import { socials } from "@/data/social";
 import { SidebarNav } from "@/components/layout/sidebar-nav";
+import { Availability } from "@/components/availability";
 import RobotCard from "@/components/robot-card";
 
 const socialIcons = {
@@ -28,6 +29,9 @@ export function Sidebar() {
 
       {/* Navigation */}
       <SidebarNav />
+
+      {/* Availability status + primary CTA */}
+      <Availability />
 
       {/* Socials + resume */}
       <div className="flex flex-col gap-3">
@@ -66,8 +70,6 @@ export function Sidebar() {
         <p className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-metadata">
           <MapPin className="h-3.5 w-3.5 text-accent" aria-hidden="true" />
           {person.location}
-          <span aria-hidden="true" className="text-white/20">/</span>
-          <span className="text-accent">{person.availability}</span>
         </p>
       </div>
 

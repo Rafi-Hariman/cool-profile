@@ -4,7 +4,14 @@ export const person = {
   name: "Adi Pratama",
   role: "Frontend Engineer",
   tagline: "I build accessible, performant interfaces that feel like instruments.",
+  // Plain-language summary shown under the About headline. SAMPLE — replace
+  // with one sentence a non-technical client would understand. Rendered only
+  // when non-empty (see components/sections/about.tsx).
+  summary:
+    "[One plain-language line: what I build, and who it helps — no jargon.]",
   availability: "Available for freelance",
+  // Label for the primary sidebar CTA (scrolls to the Contact section).
+  ctaLabel: "Contact me",
   location: "Jakarta, ID",
   email: "hello@adi.dev",
   resumeUrl: "/resume.pdf",

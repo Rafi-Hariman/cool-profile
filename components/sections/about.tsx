@@ -1,3 +1,5 @@
+import { ArrowDown } from "lucide-react";
+import { person } from "@/data/person";
 import { SectionHeading } from "@/components/section-heading";
 import Reveal from "@/components/reveal";
 
@@ -9,6 +11,15 @@ export function About() {
         eyebrow="About"
         title="Engineer first, pixel-second."
       />
+
+      {person.summary ? (
+        <Reveal className="mt-6">
+          <p className="max-w-prose text-lg leading-relaxed text-foreground sm:text-xl">
+            {person.summary}
+          </p>
+        </Reveal>
+      ) : null}
+
       <Reveal className="mt-8">
         <div className="flex max-w-prose flex-col gap-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
           <p>
@@ -28,6 +39,19 @@ export function About() {
             feel simple.
           </p>
         </div>
+      </Reveal>
+
+      <Reveal className="mt-8">
+        <a
+          href="#projects"
+          className="group inline-flex items-center gap-2 rounded font-mono text-xs uppercase tracking-[0.12em] text-accent transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        >
+          Selected work
+          <ArrowDown
+            className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-y-0.5"
+            aria-hidden="true"
+          />
+        </a>
       </Reveal>
     </section>
   );
