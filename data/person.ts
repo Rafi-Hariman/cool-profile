@@ -1,17 +1,17 @@
 // Identity & site metadata.
-// Verified from the career addendum (2026). Fields left empty are not yet
-// known/verified — they are omitted from the UI rather than guessed.
+// Verified career profile. Fields left empty are not yet known/verified —
+// they are omitted from the UI rather than guessed.
 export const person = {
   name: "Muhamad Rafi Hariman Saputra",
   role: "Frontend Developer at BSI UII",
   tagline:
-    "Informatics student and freelance web developer building responsive interfaces and practical digital solutions.",
-  // Plain-language summary shown under the About headline (see about.tsx).
+    "I build and maintain web interfaces, turn UI designs into working products, and take on selected freelance projects for profile and business websites.",
+  // Plain-language lead shown under the About headline (see about.tsx).
   summary:
-    "I build responsive, maintainable web interfaces — as a frontend developer at BSI UII, an Informatics student, and a freelance web developer.",
-  availability: "Open to Selected Freelance Projects & Collaboration",
+    "I'm a Frontend Developer at BSI UII. I build responsive interfaces and maintain web applications with clean, reusable code.",
+  availability: "Open to selected freelance projects",
   // Label for the primary sidebar CTA (scrolls to the Contact section).
-  ctaLabel: "Contact me",
+  ctaLabel: "Get in touch",
   location: "Yogyakarta, Indonesia",
   // [NEEDS INPUT] professional email — empty means the Contact CTA falls
   // back to GitHub instead of a mailto link.
@@ -29,6 +29,5 @@ export const navSections = [
   { id: "experience", label: "Experience" },
   { id: "projects", label: "Projects" },
   { id: "skills", label: "Skills" },
-  { id: "writing", label: "Writing" },
   { id: "contact", label: "Contact" },
 ] as const;

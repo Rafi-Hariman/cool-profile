@@ -1,6 +1,6 @@
-// Career journey — real, verified profile (see career addendum).
-// Dates are left coarse on purpose: the exact internship and contract
-// dates still need verification, so no month-level dates are invented.
+// Career journey — real, verified profile (see CONTENT-INVENTORY-FINAL.md).
+// Exact internship/contract dates still need verification, so no specific
+// months/years are invented.
 export interface Experience {
   period: string;
   organization: string;
@@ -12,40 +12,45 @@ export interface Experience {
 
 export const experience: Experience[] = [
   {
-    period: "After internship — Present",
+    period: "After internship · Present",
     organization: "BSI UII",
     role: "Frontend Developer",
     type: "Contract employee (SPK)",
     summary:
-      "Continued at BSI UII as a contract Frontend Developer after the internship, focusing on web application interfaces, feature development, and ongoing application maintenance.",
+      "Stayed on at BSI UII after the internship, working mainly on frontend development, feature delivery, and application maintenance.",
     points: [
-      "Translate UI/UX designs into responsive and maintainable application interfaces.",
-      "Develop and maintain frontend features for institutional web applications.",
-      "Improve interface consistency, usability, and maintainability.",
-      "Collaborate with backend developers and project stakeholders during implementation.",
+      "Translate UI/UX designs into responsive application interfaces.",
+      "Build and maintain frontend features for institutional web applications.",
+      "Work with backend developers and stakeholders during implementation.",
+      "Keep interfaces consistent and maintainable across ongoing work.",
     ],
   },
   {
-    period: "Internship · approximately 6–8 months",
+    period: "Internship · approximately 6 to 8 months",
     organization: "BSI UII",
     role: "Backend & Frontend Developer Intern",
     type: "Internship",
     summary:
-      "Started a professional software-development journey through an internship at BSI UII, contributing to backend and frontend tasks while learning how APIs, data, interfaces, and team workflows connect in real projects.",
+      "Worked on backend and frontend tasks while learning how APIs, databases, interfaces, and delivery workflows connect in real software projects.",
     points: [
-      "Collaborated across backend and frontend tasks during the internship.",
+      "Supported API and data work required by frontend features.",
+      "Helped with interface implementation and website maintenance.",
+      "Worked across both sides of the application before specializing in frontend development.",
     ],
   },
 ];
 
-// Work, study, and freelance are combined here as a summary — not as a
-// third job at BSI UII.
-export const currentFocus = {
-  label: "Current Focus",
+// Current work/study/freelance balance — a summary, not a third job.
+export const currently = {
+  label: "Currently",
   summary:
-    "Currently balancing frontend work at BSI UII, a bachelor's degree in Informatics at Universitas Mercu Buana Yogyakarta, and selected freelance projects. This combination strengthens practical engineering experience, academic foundations, and direct communication with project stakeholders.",
-  education:
-    "Bachelor of Informatics, Universitas Mercu Buana Yogyakarta — employee-class program",
-  freelance:
-    "Responsive websites, personal or business profiles, landing pages, and practical digital solutions",
+    "Frontend Developer at BSI UII · Informatics student at UMBY · selected freelance work",
+} as const;
+
+// Education — shown after the experience timeline.
+export const education = {
+  program: "Bachelor of Informatics",
+  institution: "Universitas Mercu Buana Yogyakarta",
+  format: "Employee-class program",
+  status: "Currently enrolled",
 } as const;

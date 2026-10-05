@@ -9,8 +9,8 @@ export function Skills() {
         id="skills-title"
         index="04"
         eyebrow="Skills"
-        title="Tools I reach for without thinking."
-        description="Grouped by how I think about them, not by marketing category."
+        title="Technologies I work with."
+        description="A focused view of the tools I use at work, in projects, and while learning."
       />
 
       <ul className="mt-10 grid gap-4 sm:grid-cols-3">

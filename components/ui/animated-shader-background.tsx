@@ -1,26 +1,30 @@
 "use client";
 
 import { useEffect, useRef, useState, type CSSProperties } from "react";
-import type * as ThreeTypes from "three";
 import { cn } from "@/lib/utils";
 
 /**
  * Aurora shader background (docs/10-MOTION sanctioned exception #3).
  *
- * A single GLSL quad rendered by three.js: fbm-noise aurora trails over
- * a page-black base — aurora only, no stars/meteors. Adapted for this
- * site: sizes to its container (not the window), lazily imports three,
- * and falls back to a quiet static base when WebGL is unavailable, on
- * touch devices, or under prefers-reduced-motion.
+ * A single fullscreen-quad GLSL shader (fbm-noise aurora trails over a
+ * page-black base) rendered with raw WebGL. Kept dependency-free so it does
+ * not pull in a second copy of three.js alongside the Spline runtime, and so
+ * the strip ships as a few kilobytes instead of the full three library. Falls
+ * back to a quiet static base when WebGL is unavailable, on touch devices, or
+ * under prefers-reduced-motion.
  */
 
 const VERTEX_SHADER = /* glsl */ `
+  attribute vec2 aPosition;
+
   void main() {
-    gl_Position = vec4(position, 1.0);
+    gl_Position = vec4(aPosition, 0.0, 1.0);
   }
 `;
 
 const FRAGMENT_SHADER = /* glsl */ `
+  precision highp float;
+
   uniform float iTime;
   uniform vec2 iResolution;
 
@@ -54,9 +58,6 @@ const FRAGMENT_SHADER = /* glsl */ `
     return v;
   }
 
-  // Twinkling stars / meteors were removed at the owner's request — the
-  // strip now shows the aurora alone over the page-black base.
-
   void main() {
     vec2 shake = vec2(sin(iTime * 1.2) * 0.005, cos(iTime * 2.1) * 0.005);
     vec2 p = ((gl_FragCoord.xy + shake * iResolution.xy) - iResolution.xy * 0.5) / iResolution.y * mat2(6.0, -4.0, 4.0, 6.0);
@@ -82,7 +83,11 @@ const FRAGMENT_SHADER = /* glsl */ `
       o += currentContribution * (1.0 + tailNoise * 0.8) * thinnessFactor;
     }
 
-    vec4 aurora = tanh(pow(o / 100.0, vec4(1.6))) * 1.5;
+    // WebGL1 has no tanh(), so compute the equivalent saturating curve
+    // directly: tanh(x) = 1 - 2 / (e^(2x) + 1) for x >= 0 (o is always
+    // positive here).
+    vec4 t = pow(o / 100.0, vec4(1.6));
+    vec4 aurora = (1.0 - 2.0 / (exp(2.0 * t) + 1.0)) * 1.5;
     gl_FragColor = aurora;
   }
 `;
@@ -120,109 +125,129 @@ export default function AnimatedShaderBackground({
     const container = containerRef.current;
     if (!container) return;
 
+    const canvas = document.createElement("canvas");
+    canvas.style.position = "absolute";
+    canvas.style.inset = "0";
+    canvas.style.display = "block";
+    container.appendChild(canvas);
+
+    const gl = canvas.getContext("webgl", { alpha: true, antialias: false });
+    if (!gl) {
+      container.removeChild(canvas);
+      return; // no WebGL — quiet fallback stays visible
+    }
+
+    const compile = (type: number, source: string) => {
+      const shader = gl.createShader(type);
+      if (!shader) return null;
+      gl.shaderSource(shader, source);
+      gl.compileShader(shader);
+      if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+        // eslint-disable-next-line no-console
+        console.warn("Shader compile failed:", gl.getShaderInfoLog(shader));
+        gl.deleteShader(shader);
+        return null;
+      }
+      return shader;
+    };
+
+    const vs = compile(gl.VERTEX_SHADER, VERTEX_SHADER);
+    const fs = compile(gl.FRAGMENT_SHADER, FRAGMENT_SHADER);
+    if (!vs || !fs) {
+      if (vs) gl.deleteShader(vs);
+      if (fs) gl.deleteShader(fs);
+      container.removeChild(canvas);
+      return;
+    }
+
+    const program = gl.createProgram();
+    if (!program) {
+      gl.deleteShader(vs);
+      gl.deleteShader(fs);
+      container.removeChild(canvas);
+      return;
+    }
+    gl.attachShader(program, vs);
+    gl.attachShader(program, fs);
+    gl.linkProgram(program);
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+      // eslint-disable-next-line no-console
+      console.warn("Shader link failed:", gl.getProgramInfoLog(program));
+      gl.deleteProgram(program);
+      gl.deleteShader(vs);
+      gl.deleteShader(fs);
+      container.removeChild(canvas);
+      return;
+    }
+    gl.useProgram(program);
+
+    // Fullscreen quad (two triangles) covering clip space.
+    const buffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+    gl.bufferData(
+      gl.ARRAY_BUFFER,
+      new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]),
+      gl.STATIC_DRAW
+    );
+
+    const aPosition = gl.getAttribLocation(program, "aPosition");
+    gl.enableVertexAttribArray(aPosition);
+    gl.vertexAttribPointer(aPosition, 2, gl.FLOAT, false, 0, 0);
+
+    const uTime = gl.getUniformLocation(program, "iTime");
+    const uResolution = gl.getUniformLocation(program, "iResolution");
+
+    const resize = () => {
+      const width = Math.max(1, container.clientWidth);
+      const height = Math.max(1, container.clientHeight);
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      gl.viewport(0, 0, canvas.width, canvas.height);
+      gl.uniform2f(uResolution, canvas.width, canvas.height);
+    };
+    resize();
+
     let frameId = 0;
-    let disposed = false;
     let running = false;
-    let cleanup: (() => void) | undefined;
+    let time = 0;
 
-    // Lazy import: three (~600KB) never touches the server bundle and
-    // stays out of the initial client chunk.
-    import("three")
-      .then((THREE) => {
-        if (disposed || !containerRef.current) return;
+    const tick = () => {
+      time += 0.016;
+      gl.uniform1f(uTime, time);
+      gl.drawArrays(gl.TRIANGLES, 0, 6);
+      frameId = requestAnimationFrame(tick);
+    };
+    const start = () => {
+      if (running) return;
+      running = true;
+      tick();
+    };
+    const stop = () => {
+      running = false;
+      cancelAnimationFrame(frameId);
+    };
+    start();
 
-        const scene = new THREE.Scene();
-        const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+    // Pause the render loop while the tab is hidden.
+    const handleVisibility = () => {
+      if (document.hidden) stop();
+      else start();
+    };
+    document.addEventListener("visibilitychange", handleVisibility);
 
-        let renderer: ThreeTypes.WebGLRenderer;
-        try {
-          // A full-quad shader has no geometric edges to antialias, and
-          // capping the pixel ratio keeps the two margin strips from
-          // rendering 4x pixels on retina displays.
-          renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true });
-          renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
-        } catch {
-          return; // no WebGL — quiet fallback stays visible
-        }
-
-        // The canvas overlays the static fallback (absolute inset-0). It
-        // must NOT be a block child after a full-height element, or it
-        // would be pushed below the visible strip.
-        const width = () => Math.max(1, container.clientWidth);
-        const height = () => Math.max(1, container.clientHeight);
-        renderer.domElement.style.position = "absolute";
-        renderer.domElement.style.inset = "0";
-        renderer.domElement.style.display = "block";
-        container.appendChild(renderer.domElement);
-
-        const material = new THREE.ShaderMaterial({
-          uniforms: {
-            iTime: { value: 0 },
-            iResolution: { value: new THREE.Vector2(1, 1) },
-          },
-          vertexShader: VERTEX_SHADER,
-          fragmentShader: FRAGMENT_SHADER,
-        });
-
-        const geometry = new THREE.PlaneGeometry(2, 2);
-        const mesh = new THREE.Mesh(geometry, material);
-        scene.add(mesh);
-
-        // iResolution must match the drawing buffer (device pixels), not
-        // the CSS size, because gl_FragCoord is in device pixels.
-        const resize = () => {
-          renderer.setSize(width(), height(), false);
-          const size = new THREE.Vector2();
-          renderer.getDrawingBufferSize(size);
-          material.uniforms.iResolution.value.copy(size);
-        };
-        resize();
-
-        const tick = () => {
-          material.uniforms.iTime.value += 0.016;
-          renderer.render(scene, camera);
-          frameId = requestAnimationFrame(tick);
-        };
-        const start = () => {
-          if (running) return;
-          running = true;
-          tick();
-        };
-        const stop = () => {
-          running = false;
-          cancelAnimationFrame(frameId);
-        };
-        start();
-
-        // Pause the render loop entirely while the tab is hidden — the
-        // browser throttles RAF anyway, but this also drops the CPU cost of
-        // scheduling callbacks in the background.
-        const handleVisibility = () => {
-          if (document.hidden) stop();
-          else start();
-        };
-        document.addEventListener("visibilitychange", handleVisibility);
-
-        const observer = new ResizeObserver(resize);
-        observer.observe(container);
-
-        cleanup = () => {
-          stop();
-          document.removeEventListener("visibilitychange", handleVisibility);
-          observer.disconnect();
-          container.removeChild(renderer.domElement);
-          geometry.dispose();
-          material.dispose();
-          renderer.dispose();
-        };
-      })
-      .catch(() => {
-        /* chunk failed to load — fallback stays visible */
-      });
+    const observer = new ResizeObserver(resize);
+    observer.observe(container);
 
     return () => {
-      disposed = true;
-      cleanup?.();
+      stop();
+      document.removeEventListener("visibilitychange", handleVisibility);
+      observer.disconnect();
+      gl.deleteBuffer(buffer);
+      gl.deleteProgram(program);
+      gl.deleteShader(vs);
+      gl.deleteShader(fs);
+      if (canvas.parentNode === container) container.removeChild(canvas);
     };
   }, [enabled]);
 
@@ -234,9 +259,8 @@ export default function AnimatedShaderBackground({
       aria-hidden="true"
     >
       {/* Quiet fallback under the canvas: plain page-black so the strip
-          merges seamlessly with the main content background before three
-          loads, on touch devices, reduced motion, or when WebGL is
-          unavailable. (#020409 = --background.) */}
+          merges with the main content background before the shader loads,
+          on touch devices, reduced motion, or when WebGL is unavailable. */}
       <div className="absolute inset-0 bg-[#020409]" />
     </div>
   );

@@ -68,6 +68,8 @@ export default function RobotCard({ className }: RobotCardProps) {
   return (
     <Card
       ref={cardRef}
+      role="img"
+      aria-label="Interactive 3D robot illustration"
       className={cn(
         "relative h-[200px] w-full overflow-hidden rounded-xl border border-white/[0.07] bg-[#04060c]",
         className
@@ -98,12 +100,9 @@ export default function RobotCard({ className }: RobotCardProps) {
           </div>
         </>
       ) : !canHover ? (
-        <div className="relative flex h-full w-full flex-col items-center justify-center gap-2 px-6 text-center">
+        <div className="relative flex h-full w-full items-center justify-center px-6 text-center">
           <span className="font-mono text-xs uppercase tracking-[0.12em] text-metadata">
-            Interactive 3D
-          </span>
-          <span className="font-mono text-xs uppercase tracking-[0.12em] text-accent">
-            available on desktop
+            3D illustration available on supported desktop devices
           </span>
         </div>
       ) : null}

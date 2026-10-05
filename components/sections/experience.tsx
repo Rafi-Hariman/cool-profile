@@ -1,4 +1,4 @@
-import { experience, currentFocus } from "@/data/experience";
+import { experience, currently, education } from "@/data/experience";
 import { SectionHeading } from "@/components/section-heading";
 import Reveal from "@/components/reveal";
 
@@ -9,7 +9,7 @@ export function Experience() {
         id="experience-title"
         index="02"
         eyebrow="Experience"
-        title="My professional journey."
+        title="From internship to frontend development."
       />
 
       <ol className="mt-10 flex flex-col">
@@ -58,27 +58,30 @@ export function Experience() {
         <div className="mt-4 rounded-xl border border-white/[0.07] bg-white/[0.02] p-6 sm:p-7">
           <p className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.12em] text-accent">
             <span aria-hidden="true" className="h-px w-6 bg-accent/50" />
-            {currentFocus.label}
+            {currently.label}
           </p>
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
-            {currentFocus.summary}
+            {currently.summary}
           </p>
-          <ul className="mt-4 flex flex-col gap-2 text-sm leading-relaxed text-muted-foreground">
-            <li className="flex gap-3">
-              <span
-                aria-hidden="true"
-                className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent"
-              />
-              {currentFocus.education}
-            </li>
-            <li className="flex gap-3">
-              <span
-                aria-hidden="true"
-                className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent"
-              />
-              {currentFocus.freelance}
-            </li>
-          </ul>
+        </div>
+      </Reveal>
+
+      <Reveal delay={experience.length * 80 + 80}>
+        <div className="mt-4 rounded-xl border border-white/[0.07] bg-white/[0.02] p-6 sm:p-7">
+          <p className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.12em] text-accent">
+            <span aria-hidden="true" className="h-px w-6 bg-accent/50" />
+            Education
+          </p>
+          <h3 className="mt-4 text-lg font-semibold text-foreground">
+            {education.program}
+            <span className="text-muted-foreground">
+              {" "}
+              · {education.institution}
+            </span>
+          </h3>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base">
+            {education.format} · {education.status}
+          </p>
         </div>
       </Reveal>
     </section>

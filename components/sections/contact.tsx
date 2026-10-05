@@ -1,13 +1,8 @@
-import { ArrowUpRight, Github } from "lucide-react";
-import { person } from "@/data/person";
+import { ArrowUpRight } from "lucide-react";
 import { socials } from "@/data/social";
 import { SectionHeading } from "@/components/section-heading";
 import Reveal from "@/components/reveal";
 import { Button } from "@/components/ui/button";
-
-const socialIcons = {
-  GitHub: Github,
-} as const;
 
 export function Contact() {
   const githubUrl = socials.find((s) => s.label === "GitHub")?.href;
@@ -27,10 +22,10 @@ export function Contact() {
         <Reveal>
           <SectionHeading
             id="contact-title"
-            index="06"
+            index="05"
             eyebrow="Contact"
-            title="Let's build something useful."
-            description="I am open to selected freelance projects, professional collaboration, and conversations about frontend development or practical web solutions for local businesses."
+            title="Have a project or frontend problem to discuss?"
+            description="You can find my public projects and current experiments on GitHub."
             className="mx-auto text-center [&>p]:mx-auto"
           />
         </Reveal>
@@ -38,44 +33,11 @@ export function Contact() {
         <Reveal delay={120}>
           <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Button asChild size="lg" variant="accent">
-              {person.email ? (
-                <a href={`mailto:${person.email}`}>
-                  {person.email}
-                  <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-                </a>
-              ) : (
-                <a
-                  href={githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  GitHub
-                  <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-                </a>
-              )}
+              <a href={githubUrl} target="_blank" rel="noopener noreferrer">
+                View GitHub
+                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+              </a>
             </Button>
-            <ul className="flex items-center gap-2">
-              {socials.map((social) => {
-                const Icon = socialIcons[social.label];
-                return (
-                  <li key={social.label}>
-                    <Button asChild variant="ghost" size="sm">
-                      <a
-                        href={social.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`${social.label} (opens in new tab)`}
-                      >
-                        {Icon ? (
-                          <Icon className="h-3.5 w-3.5" aria-hidden="true" />
-                        ) : null}
-                        {social.label}
-                      </a>
-                    </Button>
-                  </li>
-                );
-              })}
-            </ul>
           </div>
         </Reveal>
       </div>

@@ -7,30 +7,34 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(person.siteUrl),
   title: {
-    default: `${person.name} — ${person.role}`,
+    default: `${person.name} — Frontend Developer`,
     template: `%s — ${person.name}`,
   },
-  description: person.tagline,
+  description:
+    "Frontend Developer at BSI UII building responsive, maintainable web interfaces with Angular and TypeScript. Also studying Informatics at UMBY and taking selected freelance web projects.",
   keywords: [
     "frontend developer",
+    "Angular developer",
+    "TypeScript",
+    "web developer",
+    person.name,
+    "BSI UII",
     "portfolio",
-    person.name.toLowerCase(),
-    "react",
-    "next.js",
-    "typescript",
   ],
   authors: [{ name: person.name }],
   openGraph: {
     type: "website",
     url: person.siteUrl,
-    title: `${person.name} — ${person.role}`,
-    description: person.tagline,
-    siteName: `${person.name}'s portfolio`,
+    title: `${person.name} — Frontend Developer`,
+    description:
+      "Selected frontend work, professional experience, and technical projects by Muhamad Rafi Hariman Saputra.",
+    siteName: `${person.name} — Portfolio`,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${person.name} — ${person.role}`,
-    description: person.tagline,
+    title: `${person.name} — Frontend Developer`,
+    description:
+      "Selected frontend work, professional experience, and technical projects by Muhamad Rafi Hariman Saputra.",
   },
   alternates: {
     canonical: person.siteUrl,

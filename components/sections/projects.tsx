@@ -11,7 +11,8 @@ export function Projects() {
         id="projects-title"
         index="03"
         eyebrow="Selected Work"
-        title="Things I've built."
+        title="Projects that show how I build and learn."
+        description="A selection of reusable foundations, interface prototypes, and learning projects from my GitHub."
       />
 
       <ul className="mt-10 flex flex-col gap-4">
@@ -32,6 +33,12 @@ export function Projects() {
                   {project.summary}
                 </p>
 
+                {project.contribution ? (
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
+                    {project.contribution}
+                  </p>
+                ) : null}
+
                 <ul className="mt-4 flex flex-wrap gap-1.5">
                   {project.stack.map((tag) => (
                     <li key={tag}>
@@ -49,7 +56,7 @@ export function Projects() {
                         rel="noopener noreferrer"
                         className="group inline-flex items-center gap-1.5 rounded-sm font-mono text-sm uppercase tracking-[0.1em] text-accent underline-offset-8 transition-colors hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                       >
-                        Live demo
+                        View live demo
                         <ArrowUpRight
                           className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                           aria-hidden="true"
@@ -63,7 +70,7 @@ export function Projects() {
                         rel="noopener noreferrer"
                         className="group inline-flex items-center gap-1.5 rounded-sm font-mono text-sm uppercase tracking-[0.1em] text-accent underline-offset-8 transition-colors hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                       >
-                        Repository
+                        View repository
                         <ArrowUpRight
                           className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                           aria-hidden="true"
