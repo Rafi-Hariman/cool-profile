@@ -1,4 +1,4 @@
-import { Github, FileText, MapPin } from "lucide-react";
+import { Github, Instagram, Linkedin, MessageCircle, FileText, MapPin } from "lucide-react";
 import { person } from "@/data/person";
 import { socials } from "@/data/social";
 import { SidebarNav } from "@/components/layout/sidebar-nav";
@@ -7,6 +7,9 @@ import RobotCard from "@/components/robot-card";
 
 const socialIcons = {
   GitHub: Github,
+  Instagram: Instagram,
+  LinkedIn: Linkedin,
+  WhatsApp: MessageCircle,
 } as const;
 
 export function Sidebar() {
