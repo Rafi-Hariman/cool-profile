@@ -18,7 +18,7 @@ export function Sidebar() {
       {/* Identity */}
       <div>
         <h1 className="text-3xl font-bold tracking-tight text-foreground">
-          {person.name}
+          {person.shortName}
         </h1>
         <p className="mt-1 font-mono text-xs uppercase tracking-[0.12em] text-accent">
           {person.role}

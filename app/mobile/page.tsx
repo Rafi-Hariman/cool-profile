@@ -13,6 +13,8 @@ import {
 export const metadata: Metadata = {
   title: "App Mobile",
   description: "Mobile campaign command center landing page.",
+  // Scratch/experiment route — not part of the public portfolio.
+  robots: { index: false, follow: false },
 };
 
 interface NavigationItem {

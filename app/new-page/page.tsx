@@ -33,6 +33,8 @@ import { cn } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "New Page",
   description: "Scratch route used to preview the admin dashboard layout.",
+  // Scratch/experiment route — not part of the public portfolio.
+  robots: { index: false, follow: false },
 };
 
 const sidebarSections = [

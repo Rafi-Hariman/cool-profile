@@ -4,62 +4,109 @@ import { person } from "@/data/person";
 import { socials } from "@/data/social";
 import "./globals.css";
 
+const SITE_TITLE = `${person.shortName} — Frontend Developer`;
+
 export const metadata: Metadata = {
   metadataBase: new URL(person.siteUrl),
   title: {
-    default: `${person.name} — Frontend Developer`,
-    template: `%s — ${person.name}`,
+    default: SITE_TITLE,
+    template: `%s — ${person.shortName}`,
   },
   description:
     "Frontend Developer at BSI UII building responsive, maintainable web interfaces with Angular and TypeScript. Also studying Informatics at UMBY and taking selected freelance web projects.",
   keywords: [
-    "frontend developer",
-    "Angular developer",
-    "TypeScript",
-    "web developer",
+    person.shortName,
     person.name,
-    "BSI UII",
-    "portfolio",
+    "Frontend Developer",
+    "Angular",
+    "TypeScript",
   ],
+  applicationName: person.shortName,
   authors: [{ name: person.name }],
+  creator: person.name,
+  alternates: {
+    canonical: person.siteUrl,
+  },
   openGraph: {
     type: "website",
     url: person.siteUrl,
-    title: `${person.name} — Frontend Developer`,
+    title: SITE_TITLE,
     description:
       "Selected frontend work, professional experience, and technical projects by Muhamad Rafi Hariman Saputra.",
-    siteName: `${person.name} — Portfolio`,
+    siteName: `${person.shortName} — Portfolio`,
+    locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: `${person.name} — Frontend Developer`,
+    title: SITE_TITLE,
     description:
       "Selected frontend work, professional experience, and technical projects by Muhamad Rafi Hariman Saputra.",
   },
-  alternates: {
-    canonical: person.siteUrl,
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
 export const viewport: Viewport = {
+  colorScheme: "dark",
   themeColor: "#020409",
 };
 
-/** Person structured data (docs/08-SEO). */
+// Real social profile URLs for schema.org `sameAs`. WhatsApp is a chat
+// deep-link rather than a profile page, so it is intentionally excluded.
+const sameAs = socials
+  .filter((s) => s.label !== "WhatsApp")
+  .map((s) => s.href);
+
+/** Escape "<" so serialized JSON cannot break out of the <script> tag. */
+function serializeLd(data: Record<string, unknown>): string {
+  return JSON.stringify(data).replace(/</g, "\\u003c");
+}
+
+/** Person structured data — only fields verifiable from this repository. */
 function PersonJsonLd() {
   const data: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "Person",
-    name: person.name,
-    jobTitle: person.role,
+    name: person.shortName,
+    alternateName: person.name,
     url: person.siteUrl,
-    sameAs: socials.map((s) => s.href),
+    // Mirrors `person.role` ("Frontend Developer at BSI UII"), split for
+    // schema.org's jobTitle + worksFor shape.
+    jobTitle: "Frontend Developer",
+    worksFor: { "@type": "Organization", name: "BSI UII" },
+    knowsAbout: [
+      "Angular",
+      "TypeScript",
+      "React",
+      "Next.js",
+      "JavaScript",
+      "Tailwind CSS",
+    ],
+    sameAs,
   };
-  if (person.email) data.email = `mailto:${person.email}`;
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{ __html: serializeLd(data) }}
+    />
+  );
+}
+
+/** WebSite structured data. */
+function WebSiteJsonLd() {
+  const data: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: `${person.shortName} — Portfolio`,
+    url: person.siteUrl,
+    inLanguage: "en-US",
+  };
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: serializeLd(data) }}
     />
   );
 }
@@ -72,6 +119,7 @@ export default function RootLayout({
       <body>
         {children}
         <PersonJsonLd />
+        <WebSiteJsonLd />
       </body>
     </html>
   );

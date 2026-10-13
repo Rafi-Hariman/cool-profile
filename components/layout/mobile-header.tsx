@@ -14,9 +14,9 @@ export function MobileHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-white/[0.05] bg-background/85 backdrop-blur-md lg:hidden">
       <div className="px-6 py-4 sm:px-8">
-        <h1 className="text-lg font-bold tracking-tight text-foreground">
-          {person.name}
-        </h1>
+        <p className="text-lg font-bold tracking-tight text-foreground">
+          {person.shortName}
+        </p>
         <p className="font-mono text-xs uppercase tracking-[0.12em] text-accent">
           {person.role}
         </p>

@@ -2,7 +2,10 @@
 // Verified career profile. Fields left empty are not yet known/verified —
 // they are omitted from the UI rather than guessed.
 export const person = {
+  // Legal/full name — used for authorship, JSON-LD alternateName, footer.
   name: "Muhamad Rafi Hariman Saputra",
+  // Public name — used in the H1, <title>, and social cards.
+  shortName: "Rafi Hariman",
   role: "Frontend Developer at BSI UII",
   tagline:
     "I build and maintain web interfaces, turn UI designs into working products, and take on selected freelance projects for profile and business websites.",
@@ -18,10 +21,9 @@ export const person = {
   email: "",
   // [NEEDS INPUT] resume — empty hides the resume button.
   resumeUrl: "",
-  // No production domain yet; the GitHub repo is the only real URL so it
-  // serves as metadataBase/canonical until a domain exists.
-  // [NEEDS INPUT] production domain once deployed.
-  siteUrl: "https://github.com/Rafi-Hariman/cool-profile",
+  // Canonical production domain — used as metadataBase, canonical URL, and
+  // the base for robots.txt / sitemap / structured-data URLs.
+  siteUrl: "https://rafihariman.my.id",
 } as const;
 
 export const navSections = [
