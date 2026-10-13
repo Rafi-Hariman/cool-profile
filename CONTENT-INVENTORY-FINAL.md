@@ -4,6 +4,8 @@
 >
 > Arah penyampaian: singkat, natural, present-first, dan berbasis bukti. Posisi utama adalah **Frontend Developer at BSI UII**. Status sebagai mahasiswa Informatika dan freelancer menjadi konteks pendukung, bukan identitas yang diulang pada setiap bagian.
 >
+> Nama publik utama: **Rafi Hariman**. Nama lengkap **Muhamad Rafi Hariman Saputra** dipakai sebagai identitas formal (footer, authorship, `alternateName` pada structured data).
+>
 > Placeholder bertanda `[NEEDS INPUT]` tidak boleh tampil di production sebelum datanya dilengkapi.
 
 ---
@@ -27,18 +29,18 @@
 
 | Elemen | Teks final |
 |---|---|
-| Default title | Muhamad Rafi Hariman Saputra — Frontend Developer |
-| Child page title template | %s — Muhamad Rafi Hariman Saputra |
-| Meta description | Frontend Developer at BSI UII building responsive, maintainable web interfaces with Angular and TypeScript. Also studying Informatics at UMBY and taking selected freelance web projects. |
-| Meta keywords | frontend developer, Angular developer, TypeScript, web developer, Muhamad Rafi Hariman Saputra, BSI UII, portfolio |
-| Open Graph site name | Muhamad Rafi Hariman Saputra — Portfolio |
+| Default title | Rafi Hariman — Frontend Developer Portfolio |
+| Child page title template | %s — Rafi Hariman |
+| Meta description | Rafi Hariman is a Frontend Developer at BSI UII building responsive, maintainable web interfaces with Angular and TypeScript, and taking selected freelance projects. |
+| Meta keywords | Rafi Hariman, Muhamad Rafi Hariman Saputra, Frontend Developer, Angular, TypeScript |
+| Open Graph site name | Rafi Hariman — Portfolio |
 | Open Graph description | Selected frontend work, professional experience, and technical projects by Muhamad Rafi Hariman Saputra. |
 
 ## Sidebar dan Mobile Header
 
 | Elemen | Teks final |
 |---|---|
-| Nama | Muhamad Rafi Hariman Saputra |
+| Nama (publik) | Rafi Hariman |
 | Role | Frontend Developer at BSI UII |
 | Tagline | I build and maintain web interfaces, turn UI designs into working products, and take selected freelance projects for profile and business websites. |
 | Lokasi | Yogyakarta, Indonesia |
@@ -56,6 +58,20 @@
 - Jangan tampilkan tombol LinkedIn, email, atau résumé jika URL belum tersedia.
 - Jangan gunakan GitHub sebagai pengganti tombol kontak utama apabila email profesional sudah tersedia.
 - Hapus `Writing` dari navigasi sampai minimal satu artikel selesai dan dapat dibuka.
+
+### Status teknis (sudah diterapkan)
+
+- App Router (Next.js); domain produksi `https://rafihariman.my.id`; canonical homepage mengarah ke domain tersebut.
+- `robots.txt` dan `sitemap.xml` dibuat via Metadata Route (`app/robots.ts`, `app/sitemap.ts`); sitemap hanya memuat homepage.
+- Structured data `Person` (nama publik + `alternateName` nama lengkap) dan `WebSite` aktif di root layout.
+- Route scratch (`/mobile`, `/new-page`) di-`noindex`.
+- Konten berbahasa Inggris (`<html lang="en">`).
+- Vercel Speed Insights terpasang (`<SpeedInsights />`).
+- Ikon: `app/icon.svg` + `app/favicon.ico`; OG image dihasilkan `app/opengraph-image.tsx`.
+
+### Belum diterapkan (rekomendasi)
+
+- Halaman About, Project, dan Article terpisah **belum** dibuat — website masih one-page. Membuatnya membutuhkan konten tambahan dan persetujuan; jangan dianggap sudah tersedia.
 
 ## Robot Card
 

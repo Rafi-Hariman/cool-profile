@@ -1,10 +1,11 @@
 import type { Metadata, Viewport } from "next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { fontMono, fontSans } from "@/components/fonts";
 import { person } from "@/data/person";
 import { socials } from "@/data/social";
 import "./globals.css";
 
-const SITE_TITLE = `${person.shortName} — Frontend Developer`;
+const SITE_TITLE = `${person.shortName} — Frontend Developer Portfolio`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(person.siteUrl),
@@ -12,8 +13,7 @@ export const metadata: Metadata = {
     default: SITE_TITLE,
     template: `%s — ${person.shortName}`,
   },
-  description:
-    "Frontend Developer at BSI UII building responsive, maintainable web interfaces with Angular and TypeScript. Also studying Informatics at UMBY and taking selected freelance web projects.",
+  description: `${person.shortName} is a Frontend Developer at BSI UII building responsive, maintainable web interfaces with Angular and TypeScript, and taking selected freelance projects.`,
   keywords: [
     person.shortName,
     person.name,
@@ -118,6 +118,7 @@ export default function RootLayout({
     <html lang="en" className={`${fontSans.variable} ${fontMono.variable}`}>
       <body>
         {children}
+        <SpeedInsights />
         <PersonJsonLd />
         <WebSiteJsonLd />
       </body>
