@@ -43,6 +43,16 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Scoped article theme tokens (docs/10-MOTION exception note + the
+        // /articles light/dark feature). Homepage tokens are untouched.
+        "article-background": "hsl(var(--article-background))",
+        "article-surface": "hsl(var(--article-surface))",
+        "article-surface-muted": "hsl(var(--article-surface-muted))",
+        "article-foreground": "hsl(var(--article-foreground))",
+        "article-body": "hsl(var(--article-body))",
+        "article-muted": "hsl(var(--article-muted))",
+        "article-border": "hsl(var(--article-border))",
+        "article-accent": "hsl(var(--article-accent))",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -52,6 +62,7 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
         mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
+        serif: ["var(--font-serif)", "Georgia", "Times New Roman", "serif"],
       },
       keyframes: {
         "accordion-down": {

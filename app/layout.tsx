@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { fontMono, fontSans } from "@/components/fonts";
+import { fontMono, fontSans, fontSerif } from "@/components/fonts";
 import { person } from "@/data/person";
 import { socials } from "@/data/social";
 import "./globals.css";
@@ -115,7 +115,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${fontSans.variable} ${fontMono.variable}`}>
+    <html lang="en" className={`${fontSans.variable} ${fontMono.variable} ${fontSerif.variable}`}>
       <body>
         {children}
         <SpeedInsights />

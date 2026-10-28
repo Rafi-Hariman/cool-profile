@@ -42,6 +42,35 @@
 
     --font-sans: var(--font-grotesk);
     --font-mono: var(--font-jetbrains);
+    --font-serif: var(--font-source-serif);
+  }
+
+  /* Scoped article theme — /articles only (light/dark feature). Dark mirrors
+     the homepage deep-space palette; light is a cool off-white with a darker
+     cyan accent that still passes AA. Applied via [data-article-theme] on the
+     ArticleThemeProvider wrapper; the homepage tokens above are untouched. */
+  [data-article-theme="dark"] {
+    --article-background: 228 64% 2%;
+    --article-surface: 228 50% 3%;
+    --article-surface-muted: 230 15% 10%;
+    --article-foreground: 210 20% 98%;
+    --article-body: 215 15% 71%;
+    --article-muted: 215 15% 62%;
+    --article-border: 228 18% 12%;
+    --article-accent: 199 89% 48%;
+    color-scheme: dark;
+  }
+
+  [data-article-theme="light"] {
+    --article-background: 210 33% 98%;
+    --article-surface: 0 0% 100%;
+    --article-surface-muted: 210 25% 95%;
+    --article-foreground: 220 40% 12%;
+    --article-body: 220 16% 30%;
+    --article-muted: 220 14% 42%;
+    --article-border: 220 20% 88%;
+    --article-accent: 199 70% 28%;
+    color-scheme: light;
   }
 
   * {
@@ -73,6 +102,18 @@
 @layer utilities {
   .container-page {
     @apply mx-auto w-full max-w-6xl px-6 sm:px-8;
+  }
+
+  /* Editorial long-form prose — Source Serif 4, scoped to the article body.
+     Headings/nav/TOC/key findings/UI stay Space Grotesk; metadata and labels
+     stay JetBrains Mono. No justification, no positive letter spacing. */
+  .article-prose {
+    font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+    font-size: 1.125rem;
+    line-height: 1.75;
+    font-weight: 400;
+    letter-spacing: 0;
+    max-width: 68ch;
   }
 }
 

@@ -1,4 +1,4 @@
-import { Github, Instagram, Linkedin, MessageCircle, FileText, MapPin } from "lucide-react";
+import { Github, Instagram, Linkedin, Facebook, MessageCircle, FileText, MapPin } from "lucide-react";
 import { person } from "@/data/person";
 import { socials } from "@/data/social";
 import { SidebarNav } from "@/components/layout/sidebar-nav";
@@ -9,6 +9,7 @@ const socialIcons = {
   GitHub: Github,
   Instagram: Instagram,
   LinkedIn: Linkedin,
+  Facebook: Facebook,
   WhatsApp: MessageCircle,
 } as const;
 

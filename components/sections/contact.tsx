@@ -22,7 +22,7 @@ export function Contact() {
         <Reveal>
           <SectionHeading
             id="contact-title"
-            index="05"
+            index="06"
             eyebrow="Contact"
             title="Have a project or frontend problem to discuss?"
             description="You can find my public projects and current experiments on GitHub."

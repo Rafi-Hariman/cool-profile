@@ -1,43 +1,80 @@
+import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { articles } from "@/data/writing";
 import { SectionHeading } from "@/components/section-heading";
 import Reveal from "@/components/reveal";
+import { Badge } from "@/components/ui/badge";
+
+const MONTHS = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+
+function formatPublishedAt(iso: string): string {
+  const [year, month] = iso.split("-");
+  const m = Number(month);
+  if (!year || !m || Number.isNaN(m) || m < 1 || m > 12) return iso;
+  return `${MONTHS[m - 1]} ${year}`;
+}
 
 export function Writing() {
   return (
-    <section id="writing" aria-labelledby="writing-title" className="scroll-mt-24 border-t border-white/[0.05] py-16 sm:py-24">
+    <section
+      id="writing"
+      aria-labelledby="writing-title"
+      className="scroll-mt-24 border-t border-white/[0.05] py-16 sm:py-24"
+    >
       <SectionHeading
         id="writing-title"
         index="05"
         eyebrow="Writing"
         title="Notes from the process."
+        description="Analysis on interfaces, systems, and public services."
       />
 
       {articles.length > 0 ? (
         <ul className="mt-10 flex flex-col divide-y divide-white/[0.05]">
           {articles.map((article, i) => (
-            <li key={article.title}>
+            <li key={article.slug}>
               <Reveal delay={i * 80}>
-                <a
+                <Link
                   href={article.href}
-                  className="group flex flex-col gap-1.5 py-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
+                  className="group flex flex-col gap-3 py-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
-                  <span className="flex items-baseline gap-3">
-                    <span className="font-medium text-foreground transition-colors group-hover:text-accent">
-                      {article.title}
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+                    <Badge variant="outline">{article.category}</Badge>
+                    <span className="font-mono text-xs text-metadata">
+                      {formatPublishedAt(article.publishedAt)}
                     </span>
+                    <span className="font-mono text-xs text-metadata">
+                      {article.readingTime}
+                    </span>
+                  </div>
+
+                  <div className="flex items-start justify-between gap-4">
+                    <h3 className="text-xl font-semibold tracking-tight text-foreground transition-colors group-hover:text-accent">
+                      {article.title}
+                    </h3>
                     <ArrowUpRight
-                      className="h-3.5 w-3.5 shrink-0 text-white/30 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent"
+                      className="mt-1 h-4 w-4 shrink-0 text-white/30 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent"
                       aria-hidden="true"
                     />
-                  </span>
-                  <span className="flex items-baseline gap-4 text-sm text-muted-foreground">
+                  </div>
+
+                  <p className="max-w-prose text-sm leading-relaxed text-muted-foreground sm:text-base">
                     {article.description}
-                    <span className="font-mono text-xs text-metadata">
-                      {article.year}
-                    </span>
-                  </span>
-                </a>
+                  </p>
+                </Link>
               </Reveal>
             </li>
           ))}

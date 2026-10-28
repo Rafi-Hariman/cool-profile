@@ -7,6 +7,10 @@ export const socials = [
     href: "https://id.linkedin.com/in/muhamad-rafi-hariman-saputra",
   },
   {
+    label: "Facebook",
+    href: "https://www.facebook.com/profile.php?id=100046284153981",
+  },
+  {
     label: "WhatsApp",
     href: "https://wa.me/+628979670295?text=ready%20for%20project?",
   },
