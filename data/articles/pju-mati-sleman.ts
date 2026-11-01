@@ -18,7 +18,7 @@ export const articleMeta = {
   author: {
     name: "Muhamad Rafi Hariman Saputra",
     shortName: "Rafi Hariman",
-    url: "https://rafihariman.my.id",
+    url: "https://rafihariman.my.id/profile",
   },
 } as const;
 

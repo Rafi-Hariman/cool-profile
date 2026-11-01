@@ -104,6 +104,25 @@
     @apply mx-auto w-full max-w-6xl px-6 sm:px-8;
   }
 
+  /* Marketing homepage surface — max content width ≈1180px, generous side
+     padding on small screens. Separate from .container-page (portfolio). */
+  .container-marketing {
+    @apply mx-auto w-full max-w-[1180px] px-5 sm:px-8;
+  }
+
+  /* Blue → cyan headline accent used once, in the hero H1. */
+  .text-brand-gradient {
+    background-image: linear-gradient(90deg, #2457e6 0%, #0ea5e9 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Shared keyboard focus ring for light marketing surfaces. */
+  .focus-brand {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-white;
+  }
+
   /* Editorial long-form prose — Source Serif 4, scoped to the article body.
      Headings/nav/TOC/key findings/UI stay Space Grotesk; metadata and labels
      stay JetBrains Mono. No justification, no positive letter spacing. */

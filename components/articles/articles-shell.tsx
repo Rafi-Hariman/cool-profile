@@ -4,8 +4,8 @@ import { ThemeToggle } from "@/components/articles/article-theme";
 
 const headerLinks = [
   { href: "/", label: "Home" },
-  { href: "/#projects", label: "Projects" },
-  { href: "/#about", label: "About" },
+  { href: "/profile", label: "Profile" },
+  { href: "/articles", label: "Articles" },
 ] as const;
 
 /**

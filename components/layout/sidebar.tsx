@@ -1,4 +1,5 @@
-import { Github, Instagram, Linkedin, Facebook, MessageCircle, FileText, MapPin } from "lucide-react";
+import Link from "next/link";
+import { ArrowUpRight, Github, Instagram, Linkedin, Facebook, MessageCircle, FileText, MapPin } from "lucide-react";
 import { person } from "@/data/person";
 import { socials } from "@/data/social";
 import { SidebarNav } from "@/components/layout/sidebar-nav";
@@ -19,15 +20,34 @@ export function Sidebar() {
       {/* Identity */}
       <div>
         <h1 className="text-3xl font-bold tracking-tight text-foreground">
-          {person.shortName}
+          {person.name}
         </h1>
         <p className="mt-1 font-mono text-xs uppercase tracking-[0.12em] text-accent">
-          {person.role}
+          Frontend Developer
+        </p>
+        <p className="mt-3 font-mono text-xs tracking-[0.04em] text-muted-foreground">
+          {person.shortName}
         </p>
         <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
           {person.tagline}
         </p>
       </div>
+
+      {/* Cross-link to the primary business site. The portfolio stays
+          secondary; the marketing homepage sells the service. */}
+      <Link
+        href="/"
+        lang="id"
+        className="group flex items-center justify-between gap-3 rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-3 transition-colors hover:border-accent/40 hover:bg-white/[0.05] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      >
+        <span className="block text-sm font-medium text-foreground">
+          Lihat layanan Rahesa
+        </span>
+        <ArrowUpRight
+          className="h-4 w-4 shrink-0 text-metadata transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent motion-reduce:transform-none"
+          aria-hidden="true"
+        />
+      </Link>
 
       {/* Navigation */}
       <SidebarNav />

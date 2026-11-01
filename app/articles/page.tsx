@@ -48,7 +48,7 @@ export default function ArticlesPage() {
   const featured = articles.find((a) => a.featured) ?? articles[0];
 
   return (
-    <div className="pt-12 sm:pt-16">
+    <div lang="en" className="pt-12 sm:pt-16">
       <header>
         <p className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.12em] text-article-accent">
           <span aria-hidden="true" className="text-article-muted">

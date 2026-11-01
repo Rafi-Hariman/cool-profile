@@ -43,6 +43,19 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Marketing surface palette (homepage). Deliberately separate from the
+        // dark portfolio tokens so /profile and /articles keep their theme.
+        brand: {
+          blue: "#2457E6",
+          navy: "#101A38",
+          cyan: "#0EA5E9",
+          ink: "#121827",
+          muted: "#657083",
+          light: "#F7F9FD",
+          line: "#E4E9F2",
+          green: "#12A477",
+          "green-soft": "#E6F7F0",
+        },
         // Scoped article theme tokens (docs/10-MOTION exception note + the
         // /articles light/dark feature). Homepage tokens are untouched.
         "article-background": "hsl(var(--article-background))",
@@ -59,6 +72,13 @@ const config: Config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      boxShadow: {
+        // Light, restrained elevation for the marketing cards.
+        card: "0 1px 2px 0 rgb(16 26 56 / 0.04), 0 12px 32px -18px rgb(16 26 56 / 0.18)",
+        "card-hover":
+          "0 2px 4px 0 rgb(16 26 56 / 0.04), 0 20px 44px -20px rgb(16 26 56 / 0.24)",
+        "brand-glow": "0 18px 50px -20px rgb(36 87 230 / 0.55)",
+      },
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
         mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
@@ -73,10 +93,15 @@ const config: Config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "fade-up": {
+          from: { opacity: "0", transform: "translateY(16px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "fade-up": "fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both",
       },
     },
   },

@@ -7,7 +7,7 @@ export function AuthorCard() {
   const linkedin = socials.find((s) => s.label === "LinkedIn")?.href;
 
   const links = [
-    { href: "/", label: "Home" },
+    { href: "/profile", label: "Profile" },
     ...(github ? [{ href: github, label: "GitHub" }] : []),
     ...(linkedin ? [{ href: linkedin, label: "LinkedIn" }] : []),
   ];
